@@ -3,7 +3,7 @@ package src.easy;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SingleNumberwithHashTable {
+public class SingleNumberWithHashTable {
     public static void main(String[] args) {
         int[] nums = {4,1,2,1,2};
 
