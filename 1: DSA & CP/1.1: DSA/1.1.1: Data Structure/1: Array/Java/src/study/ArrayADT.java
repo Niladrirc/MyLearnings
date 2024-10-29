@@ -8,10 +8,10 @@ class Array {
     private int size;
     private int[] array;
 
-    public Array(int size, int[] array) {
+    public Array(int size) {
         this.length = 0;
         this.size = size;
-        this.array = array;
+        this.array = new int[size];
     }
 
     public int getLength() {
@@ -269,6 +269,34 @@ class Array {
         System.arraycopy(array, 0, mergedArray, 0, newArray.length);
         System.arraycopy(newArray.getArray(), 0, mergedArray, newArray.length, newArray.length);
         return mergedArray;
+    }
+
+    public Array union(Array otherArray) throws Exception {
+        if (isSorted() && otherArray.isSorted()) {
+            return this.sortedUnion(otherArray);
+        } else {
+            return this.unsortedUnion(otherArray);
+        }
+    }
+
+    private Array sortedUnion(Array otherArray) {
+        Array newArray = new Array(otherArray.getLength() + this.length);
+    }
+
+    public Array intersection(Array otherArray) throws Exception {
+        if (isSorted() && otherArray.isSorted()) {
+            return this.sortedIntersection(otherArray);
+        } else {
+            return this.unsortedIntersection(otherArray);
+        }
+    }
+
+    public Array difference(Array otherArray) throws Exception {
+        if (isSorted() && otherArray.isSorted()) {
+            return this.sortedDifference(otherArray);
+        } else {
+            return this.unsortedDifference(otherArray);
+        }
     }
 }
 
