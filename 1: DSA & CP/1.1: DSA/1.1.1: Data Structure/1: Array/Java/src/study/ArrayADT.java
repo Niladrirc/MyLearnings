@@ -279,24 +279,71 @@ class Array {
         }
     }
 
+    private Array unsortedUnion(Array otherArray) {
+        Array newArray = new Array(otherArray.getLength() + this.length);
+        System.arraycopy(this.array, 0, newArray.getArray(), 0, this.length);
+
+        for (int i = 0; i < otherArray.getLength(); i++) {
+            int newElement = otherArray.get(i);
+            if (newArray.binarySearchLoop(newElement) == -1) {
+                newArray.addElement(newElement);
+            }
+        }
+        return newArray;
+    }
+
     private Array sortedUnion(Array otherArray) {
         Array newArray = new Array(otherArray.getLength() + this.length);
+        int thisArrayIndex = 0, otherArrayIndex = 0, newArrayIndex = 0;
+        while (thisArrayIndex<this.array.length && otherArrayIndex<otherArray.getLength()) {
+            if (this.array[thisArrayIndex] < otherArray.getArray()[otherArrayIndex]) {
+                newArray.addElement(this.array[thisArrayIndex]);
+                thisArrayIndex++; newArrayIndex++;
+            } else if (this.array[thisArrayIndex] > otherArray.getArray()[otherArrayIndex]) {
+                newArray.addElement(otherArray.getArray()[otherArrayIndex]);
+                otherArrayIndex++; newArrayIndex++;
+            } else {
+                newArray.addElement(this.array[thisArrayIndex]);
+                thisArrayIndex++; newArrayIndex++; newArrayIndex++;
+            }
+        }
+
+        if (thisArrayIndex < this.length) {
+            for (int i = thisArrayIndex+1; i < this.length; i++) {
+                newArray.addElement(this.array[i]);
+            }
+        } else if (otherArrayIndex < otherArray.getLength()) {
+            for (int i = otherArrayIndex+1; i < this.length; i++) {
+                newArray.addElement(otherArray.getArray()[i]);
+            }
+        }
+
+        return newArray;
     }
 
     public Array intersection(Array otherArray) throws Exception {
-        if (isSorted() && otherArray.isSorted()) {
-            return this.sortedIntersection(otherArray);
-        } else {
-            return this.unsortedIntersection(otherArray);
+        Array intersectionArray = new Array(Math.max(this.length, otherArray.getLength()));
+        for (int thisArrayIndex = 0; thisArrayIndex < this.array.length; thisArrayIndex++) {
+            for (int otherArrayIndex = 0; otherArrayIndex < otherArray.getLength(); otherArrayIndex++) {
+                if (this.array[thisArrayIndex] == otherArray.get(otherArrayIndex)) {
+                    intersectionArray.addElement(this.array[thisArrayIndex]);
+                    thisArrayIndex++;
+                }
+            }
         }
+        return intersectionArray;
     }
 
     public Array difference(Array otherArray) throws Exception {
-        if (isSorted() && otherArray.isSorted()) {
-            return this.sortedDifference(otherArray);
-        } else {
-            return this.unsortedDifference(otherArray);
+        Array differenceArray = new Array(length);
+        for (int i : this.array) {
+            for (int otherArrayIndex = 0; otherArrayIndex < otherArray.getLength(); otherArrayIndex++) {
+                if (i != otherArray.get(otherArrayIndex)) {
+                    differenceArray.addElement(i);
+                }
+            }
         }
+        return differenceArray;
     }
 }
 
