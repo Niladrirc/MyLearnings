@@ -51,7 +51,7 @@ class Array {
         }
     }
 
-    public void insertWithoutReplace(int index, int value) {
+    public void update(int index, int value) {
         if (index >= this.size) {
             throw new ArrayIndexOutOfBoundsException("Provided index out of bounds");
         }
@@ -344,6 +344,19 @@ class Array {
             }
         }
         return differenceArray;
+    }
+
+    public void findMissingElements() {
+        int maxIndex = this.max();
+        Array missingElements = new Array(maxIndex);
+        for (int i : array) {
+            missingElements.update(i, missingElements.get(i)+1);
+        }
+        System.out.print("Missing elements are: ");
+        for (int i : missingElements.getArray()) {
+            if (i > 0)
+                System.out.print(i + ", ");
+        }
     }
 }
 
