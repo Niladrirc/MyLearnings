@@ -18,11 +18,7 @@ public class FirstOccuranceSubstring {
     private static int strStr(String haystack, String needle) {
         int firstOccurrence = -1;
         StringBuilder newHaystack = new StringBuilder(haystack);
-
-        StringBuilder newNeedle = new StringBuilder(needle);
-
-        firstOccurrence = newHaystack.indexOf(String.valueOf(newNeedle));
-
+        firstOccurrence = newHaystack.indexOf(needle);
         return firstOccurrence;
     }
 }
