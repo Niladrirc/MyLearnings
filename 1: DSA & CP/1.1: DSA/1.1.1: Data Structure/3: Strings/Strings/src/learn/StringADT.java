@@ -138,6 +138,17 @@ class StringADT {
         return str.contentEquals(newStr);
     }
 
+    public boolean isValidPalindrome(String s) {
+        StringBuilder newStr = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            if (Character.isLetterOrDigit(s.charAt(i))) {
+                newStr.append(Character.toLowerCase(s.charAt(i)));
+            }
+        }
+        String reversedStr = new StringBuilder(newStr).reverse().toString();
+        return newStr.toString().equals(reversedStr);
+    }
+
     public void findDuplicates() {
         Map<Character, Integer> repeatLetterCount = new HashMap<>();
 

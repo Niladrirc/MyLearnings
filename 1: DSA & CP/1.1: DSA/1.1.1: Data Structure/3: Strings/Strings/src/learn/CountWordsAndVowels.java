@@ -16,6 +16,11 @@ public class CountWordsAndVowels {
             System.out.println("Not a palindrome");
         }
 
+        if (myStringObj.isValidPalindrome("0P")) {
+            System.out.println("Palindrome");
+        } else
+            System.out.println("Not a palindrome");
+
         myStringObj.findDuplicates();
         myStringObj.findDuplicates("AAAA");
     }
