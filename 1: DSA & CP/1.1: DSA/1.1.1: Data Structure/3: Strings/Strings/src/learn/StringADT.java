@@ -41,6 +41,16 @@ class StringADT {
         return count;
     }
 
+    public int letterCount(String str) {
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) >= 'A' && str.charAt(i) <= 'z') {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public int wordsCount() {
         int count = 0;
         for (int i = 1; i < str.length(); i++) {
@@ -51,7 +61,29 @@ class StringADT {
         return count+1;
     }
 
+    public int wordsCount(String s) {
+        int count = 0;
+        for (int i = 1; i < s.length(); i++) {
+            if (s.charAt(i) == ' ' && s.charAt(i - 1) != ' ') {
+                count++;
+            }
+        }
+        return count+1;
+    }
+
     public int vowelCount() {
+        int count = 0;
+        if (vowels.isEmpty()) {
+            this.setVowelsSet();
+        }
+        for (int i = 0; i < str.length(); i++) {
+            if (vowels.contains(str.charAt(i)))
+                count++;
+        }
+        return count;
+    }
+
+    public int vowelCount(String str) {
         int count = 0;
         if (vowels.isEmpty()) {
             this.setVowelsSet();
@@ -76,5 +108,34 @@ class StringADT {
             }
         }
         return count;
+    }
+
+    public int uniqueVowelCount(String str) {
+        int count = 0;
+        if (vowels.isEmpty()) {
+            this.setVowelsSet();
+        }
+        Set<Character> encounteredVowelSet = new HashSet<>();
+        for (int i = 0; i < str.length(); i++) {
+            if (vowels.contains(str.charAt(i)) && !encounteredVowelSet.contains(str.charAt(i))) {
+                encounteredVowelSet.add(str.charAt(i));
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public boolean isPalindrome() {
+        StringBuilder newStr = new StringBuilder();
+        newStr.append(str);
+        newStr.reverse();
+        return str.contentEquals(newStr);
+    }
+
+    public boolean isPalindrome(String str) {
+        StringBuilder newStr = new StringBuilder();
+        newStr.append(str);
+        newStr.reverse();
+        return str.contentEquals(newStr);
     }
 }
