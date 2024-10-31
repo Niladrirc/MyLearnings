@@ -1,7 +1,6 @@
 package learn;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 class StringADT {
     private String str = "";
@@ -137,5 +136,43 @@ class StringADT {
         newStr.append(str);
         newStr.reverse();
         return str.contentEquals(newStr);
+    }
+
+    public void findDuplicates() {
+        Map<Character, Integer> repeatLetterCount = new HashMap<>();
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (repeatLetterCount.containsKey(ch)) {
+                repeatLetterCount.put(ch, repeatLetterCount.get(ch) + 1);
+            } else {
+                repeatLetterCount.put(ch, 1);
+            }
+        }
+
+        for (Map.Entry<Character, Integer> entry : repeatLetterCount.entrySet()) {
+            if (entry.getValue() > 1) {
+                System.out.println("Letter " + entry.getKey() + " occurred " + entry.getValue() + " times");
+            }
+        }
+    }
+
+    public void findDuplicates(String s) {
+        Map<Character, Integer> repeatLetterCount = new HashMap<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (repeatLetterCount.containsKey(ch)) {
+                repeatLetterCount.put(ch, repeatLetterCount.get(ch) + 1);
+            } else {
+                repeatLetterCount.put(ch, 1);
+            }
+        }
+
+        for (Map.Entry<Character, Integer> entry : repeatLetterCount.entrySet()) {
+            if (entry.getValue() > 1) {
+                System.out.println("Letter " + entry.getKey() + " occurred " + entry.getValue() + " times");
+            }
+        }
     }
 }

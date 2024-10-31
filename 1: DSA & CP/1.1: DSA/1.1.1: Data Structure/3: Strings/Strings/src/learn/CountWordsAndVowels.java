@@ -15,5 +15,8 @@ public class CountWordsAndVowels {
         } else {
             System.out.println("Not a palindrome");
         }
+
+        myStringObj.findDuplicates();
+        myStringObj.findDuplicates("AAAA");
     }
 }
