@@ -9,5 +9,11 @@ public class CountWordsAndVowels {
         System.out.println("Number of words in the string: "+ myStringObj.wordsCount());
         System.out.println("Number of vowels in the string: "+ myStringObj.vowelCount());
         System.out.println("Number of unique vowels in the string: "+ myStringObj.uniqueVowelCount());
+
+        if (myStringObj.isPalindrome("ABBA")) {
+            System.out.println("Palindrome");
+        } else {
+            System.out.println("Not a palindrome");
+        }
     }
 }
