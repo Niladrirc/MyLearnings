@@ -2,29 +2,6 @@ package src.learning;
 
 import java.util.*;
 
-class BinaryTreeNode {
-    private final int value;
-    private final BinaryTreeNode left, right;
-
-    public BinaryTreeNode(int value) {
-        this.value = value;
-        this.left = null;
-        this.right = null;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public BinaryTreeNode getLeft() {
-        return left;
-    }
-
-    public BinaryTreeNode getRight() {
-        return right;
-    }
-}
-
 //class BinaryTree {
 //    private BinaryTreeNode root;
 //    private final Scanner input = new Scanner(System.in);
