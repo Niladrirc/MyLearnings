@@ -61,13 +61,13 @@ class StringADT {
     }
 
     public int wordsCount(String s) {
+        String[] words = s.split(" ");
         int count = 0;
-        for (int i = 1; i < s.length(); i++) {
-            if (s.charAt(i) == ' ' && s.charAt(i - 1) != ' ') {
-                count++;
-            }
+        for (String word : words) {
+            count++;
         }
-        return count+1;
+
+        return count;
     }
 
     public int vowelCount() {
