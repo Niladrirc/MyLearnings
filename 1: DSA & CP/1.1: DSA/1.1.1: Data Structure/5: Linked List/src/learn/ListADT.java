@@ -92,6 +92,7 @@ public class ListADT<T> {
         if (node == null) {
             System.err.println("List is empty!");
         }
+        
         if (node != null && !(node.data instanceof Number)) {
             System.err.println("Summation not possible for non-numeric types.");
             return null;
@@ -105,5 +106,30 @@ public class ListADT<T> {
         }
 
         return sum;
+    }
+
+    public ListNode<T> largestNode(ListNode<T> node) {
+        if (node == null) {
+            System.err.println("List is empty!");
+            return null;
+        }
+
+        if (!(node.data instanceof Number)) {
+            System.err.println("Largest node not possible for non-numeric types.");
+            return null;
+        }
+
+        ListNode<T> temp = node;
+        double max = 0.0;
+        ListNode<T> largest = node;
+        while (temp != null) {
+            if (((Number) temp.data).doubleValue() > max) {
+                max = ((Number) temp.data).doubleValue();
+                largest = temp;
+            }
+            temp = temp.next;
+        }
+
+        return largest;
     }
 }
