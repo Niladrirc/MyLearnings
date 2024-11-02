@@ -1,8 +1,5 @@
 package src.learn;
 
-import java.util.List;
-import java.util.Objects;
-
 public class ListADT<T> {
     private ListNode<T> head;
     private ListNode<T> tail;
@@ -182,5 +179,36 @@ public class ListADT<T> {
         return null;
     }
 
-    
+    public void insert(T data, int index) {
+        ListNode<T> newNode = new ListNode<>(data);
+        int nodeCount = nodeCount(newNode);
+        
+        if (head == null) {
+            System.err.println("List is empty! Creating a new node.");
+            head = newNode;
+            tail = newNode;
+        }
+        int listIndex = 0; ListNode<T> temp = head;
+        if (index == 0) {
+            // Insert at start
+            newNode.next = head;
+            head = newNode;
+        } else if (index == nodeCount-1) {
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            newNode.next = null;
+            temp.next = newNode;
+            tail = newNode;
+        } else if (0 < index && index < nodeCount-1) {
+            while (listIndex < nodeCount - 1 && temp.next != null) {
+                temp = temp.next;
+                listIndex++;
+            }
+            newNode.next = temp.next;
+            temp.next = newNode;
+        } else {
+            System.err.println("Invalid index provided");
+        }
+    }
 }
