@@ -15,6 +15,59 @@ public class ListADT<T> {
         System.out.println("Number of nodes in the list: "+listADT.size());
     }
 
+    public int size(ListNode<T> node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + size(node.next);
+    }
+
+    public int size() {
+        return this.size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public boolean contains(Object o) {
+        return indexOf(o) > 0;
+    }
+
+    private int indexOf(Object o) {
+        ListNode<T> temp = head;
+        if (o != null) {
+            for (int i = 0; i < this.size(); i++) {
+                if (temp.data.equals(o)) {
+                    return i;
+                }
+                temp = temp.next;
+            }
+        } else {
+            for (int i = 0; i < this.size(); i++) {
+                if (temp == null) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public boolean contains(ListNode<T> node, T target) {
+        if (node == null) {
+            System.err.println("List is empty!");
+            return false;
+        }
+        ListNode<T> temp = node;
+        while (temp != null) {
+            if (temp.data.equals(target)) {
+                return true;
+            }
+            temp = temp.next;
+        }
+        return false;
+    }
+
     public ListNode<T> createList(T[] arr) {
         for (T t : arr) {
             ListNode<T> newNode = new ListNode<>(t);
@@ -66,17 +119,6 @@ public class ListADT<T> {
         }
         System.out.print(" ]");
         System.out.println();
-    }
-
-    public int size(ListNode<T> node) {
-        if (node == null) {
-            return 0;
-        }
-        return 1 + size(node.next);
-    }
-
-    public int size() {
-        return this.size;
     }
 
     public Object sum(ListNode<T> node) {
@@ -143,21 +185,6 @@ public class ListADT<T> {
         return -1;
     }
 
-    public boolean search(ListNode<T> node, T target) {
-        if (node == null) {
-            System.err.println("List is empty!");
-            return false;
-        }
-        ListNode<T> temp = node;
-        while (temp != null) {
-            if (temp.data.equals(target)) {
-                return true;
-            }
-            temp = temp.next;
-        }
-        return false;
-    }
-
     public ListNode<T> find(ListNode<T> node, T target) {
         if (node == null) {
             System.err.println("List is empty!");
@@ -204,9 +231,5 @@ public class ListADT<T> {
         } else {
             System.err.println("Invalid index provided");
         }
-    }
-
-    public boolean isEmpty() {
-        return head == null;
     }
 }
