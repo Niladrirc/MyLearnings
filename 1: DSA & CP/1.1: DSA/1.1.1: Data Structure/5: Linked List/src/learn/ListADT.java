@@ -92,7 +92,7 @@ public class ListADT<T> {
         if (node == null) {
             System.err.println("List is empty!");
         }
-        
+
         if (node != null && !(node.data instanceof Number)) {
             System.err.println("Summation not possible for non-numeric types.");
             return null;
@@ -132,4 +132,55 @@ public class ListADT<T> {
 
         return largest;
     }
+
+    public int searchForIndex(ListNode<T> node, T target) {
+        if (node == null) {
+            System.err.println("List is empty!");
+            return -1;
+        }
+
+        ListNode<T> temp = node;
+        int index = 0;
+        while (temp != null) {
+            if (!temp.data.equals(target)) {
+                index++;
+                temp = temp.next;
+            } else {
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    public boolean search(ListNode<T> node, T target) {
+        if (node == null) {
+            System.err.println("List is empty!");
+            return false;
+        }
+        ListNode<T> temp = node;
+        while (temp != null) {
+            if (temp.data.equals(target)) {
+                return true;
+            }
+            temp = temp.next;
+        }
+        return false;
+    }
+
+    public ListNode<T> find(ListNode<T> node, T target) {
+        if (node == null) {
+            System.err.println("List is empty!");
+            return null;
+        }
+        ListNode<T> temp = node;
+        while (temp != null) {
+            if (temp.data.equals(target)) {
+                return temp;
+            }
+            temp = temp.next;
+        }
+        return null;
+    }
+
+    
 }
