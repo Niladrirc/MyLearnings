@@ -4,6 +4,7 @@ public class ListADT<T> {
     private ListNode<T> head;
     private ListNode<T> tail;
 
+    private int size;
 
     public static void main(String[] args) {
         Integer[] A = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -11,7 +12,7 @@ public class ListADT<T> {
         listADT.createList(A);
         listADT.display();
 
-        System.out.println("Number of nodes in the list: "+listADT.nodeCount());
+        System.out.println("Number of nodes in the list: "+listADT.size());
     }
 
     public ListNode<T> createList(T[] arr) {
@@ -20,9 +21,11 @@ public class ListADT<T> {
             if (head == null) {
                 head = newNode;
                 tail = newNode;
+                this.size = 1;
             } else {
                 tail.next = newNode;
                 tail = newNode;
+                this.size++;
             }
         }
         return head;
@@ -65,24 +68,15 @@ public class ListADT<T> {
         System.out.println();
     }
 
-    public int nodeCount(ListNode<T> node) {
+    public int size(ListNode<T> node) {
         if (node == null) {
             return 0;
         }
-        return 1 + nodeCount(node.next);
+        return 1 + size(node.next);
     }
 
-    public int nodeCount() {
-        if (head == null) {
-            return 0;
-        }
-        int count = 0;
-        ListNode<T> temp = head;
-        while (temp != null) {
-            count++;
-            temp = temp.next;
-        }
-        return count;
+    public int size() {
+        return this.size;
     }
 
     public Object sum(ListNode<T> node) {
@@ -181,7 +175,7 @@ public class ListADT<T> {
 
     public void insert(T data, int index) {
         ListNode<T> newNode = new ListNode<>(data);
-        int nodeCount = nodeCount(newNode);
+        int nodeCount = size(newNode);
         
         if (head == null) {
             System.err.println("List is empty! Creating a new node.");
@@ -210,5 +204,9 @@ public class ListADT<T> {
         } else {
             System.err.println("Invalid index provided");
         }
+    }
+
+    public boolean isEmpty() {
+        return head == null;
     }
 }
