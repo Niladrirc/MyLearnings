@@ -1,24 +1,25 @@
 package src.learn;
 
 import java.util.List;
+import java.util.Objects;
 
-public class ListADT {
-    private ListNode head;
-    private ListNode tail;
+public class ListADT<T> {
+    private ListNode<T> head;
+    private ListNode<T> tail;
 
 
     public static void main(String[] args) {
-        int[] A = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-        ListADT listADT = new ListADT();
+        Integer[] A = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        ListADT<Integer> listADT = new ListADT<>();
         listADT.createList(A);
         listADT.display();
 
         System.out.println("Number of nodes in the list: "+listADT.nodeCount());
     }
 
-    public ListNode createList(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            ListNode newNode = new ListNode(arr[i]);
+    public ListNode<T> createList(T[] arr) {
+        for (T t : arr) {
+            ListNode<T> newNode = new ListNode<>(t);
             if (head == null) {
                 head = newNode;
                 tail = newNode;
@@ -33,34 +34,41 @@ public class ListADT {
     public void display() {
         if (head == null) {
             System.err.println("List is empty!");
+            return;
         }
 
-        ListNode temp = head;
+        ListNode<T> temp = head;
         System.out.print("List: [ ");
-        while (temp.next.next != null) {
-            System.out.print(temp.data + ", ");
+        while (temp != null) {
+            System.out.print(temp.data);
             temp = temp.next;
+            if (temp != null) {
+                System.out.print(", ");
+            }
         }
-        System.out.print(temp.next.data+" ]");
+        System.out.print(" ]");
         System.out.println();
     }
 
-    public void display(ListNode head) {
+    public void display(ListNode<T> head) {
         if (head == null) {
             System.err.println("List is empty!");
+            return;
         }
-
-        ListNode temp = head;
+        ListNode<T> temp = head;
         System.out.print("List: [ ");
-        while (temp.next.next != null) {
-            System.out.print(temp.data + ", ");
+        while (temp != null) {
+            System.out.print(temp.data);
             temp = temp.next;
+            if (temp != null) {
+                System.out.print(", ");
+            }
         }
-        System.out.print(temp.next.data+" ]");
+        System.out.print(" ]");
         System.out.println();
     }
 
-    public int nodeCount(ListNode node) {
+    public int nodeCount(ListNode<T> node) {
         if (node == null) {
             return 0;
         }
@@ -72,11 +80,30 @@ public class ListADT {
             return 0;
         }
         int count = 0;
-        ListNode temp = head;
+        ListNode<T> temp = head;
         while (temp != null) {
             count++;
             temp = temp.next;
         }
         return count;
+    }
+
+    public Object sum(ListNode<T> node) {
+        if (node == null) {
+            System.err.println("List is empty!");
+        }
+        if (node != null && !(node.data instanceof Number)) {
+            System.err.println("Summation not possible for non-numeric types.");
+            return null;
+        }
+
+        ListNode<T> temp = node;
+        double sum = 0.0;
+        while (temp != null) {
+            sum += ((Number) temp.data).doubleValue();
+            temp = temp.next;
+        }
+
+        return sum;
     }
 }

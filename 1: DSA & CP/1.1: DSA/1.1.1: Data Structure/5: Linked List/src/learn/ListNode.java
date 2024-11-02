@@ -1,11 +1,11 @@
 package src.learn;
 
-public class ListNode {
-    int data;
-    ListNode next;
+public class ListNode<E> {
+    E data;
+    ListNode<E> next;
     public ListNode() {}
-    public ListNode(int data) { this.data = data; this.next = null; }
-    public ListNode(int data, ListNode next) { this.data = data; this.next = next; }
+    public ListNode(E data) { this.data = data; this.next = null; }
+    public ListNode(E data, ListNode<E> next) { this.data = data; this.next = next; }
 
     @Override
     public String toString() {
