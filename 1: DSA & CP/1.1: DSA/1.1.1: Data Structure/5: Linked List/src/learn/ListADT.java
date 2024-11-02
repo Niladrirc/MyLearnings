@@ -1,5 +1,8 @@
 package src.learn;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ListADT<T> {
     private ListNode<T> head;
     private ListNode<T> tail;
@@ -85,12 +88,11 @@ public class ListADT<T> {
     }
 
     public void display() {
-        if (head == null) {
+        if (size == 0) {
             System.err.println("List is empty!");
             return;
         }
-
-        ListNode<T> temp = head;
+        ListNode<T> temp = this.head;
         System.out.print("List: [ ");
         while (temp != null) {
             System.out.print(temp.data);
@@ -99,16 +101,15 @@ public class ListADT<T> {
                 System.out.print(", ");
             }
         }
-        System.out.print(" ]");
-        System.out.println();
+        System.out.print(" ]\n");
     }
 
-    public void display(ListNode<T> head) {
-        if (head == null) {
+    public void display(ListNode<T> node) {
+        if (node == null) {
             System.err.println("List is empty!");
             return;
         }
-        ListNode<T> temp = head;
+        ListNode<T> temp = node;
         System.out.print("List: [ ");
         while (temp != null) {
             System.out.print(temp.data);
@@ -125,36 +126,49 @@ public class ListADT<T> {
         if (node == null) {
             System.err.println("List is empty!");
         }
-
         if (node != null && !(node.data instanceof Number)) {
             System.err.println("Summation not possible for non-numeric types.");
             return null;
         }
-
         ListNode<T> temp = node;
         double sum = 0.0;
         while (temp != null) {
             sum += ((Number) temp.data).doubleValue();
             temp = temp.next;
         }
-
         return sum;
     }
 
-    public ListNode<T> largestNode(ListNode<T> node) {
-        if (node == null) {
+    public Object sum() {
+        if (size == 0) {
             System.err.println("List is empty!");
             return null;
         }
+        if (!(this.head.data instanceof Number)) {
+            System.err.println("Summation not possible for non-numeric types.");
+            return null;
+        }
+        ListNode<T> temp = this.head;
+        double sum = 0.0;
+        while (temp != null) {
+            sum += ((Number) temp.data).doubleValue();
+            temp = temp.next;
+        }
+        return sum;
+    }
 
-        if (!(node.data instanceof Number)) {
+    public ListNode<T> largestNode() {
+        if (size == 0) {
+            System.err.println("List is empty!");
+            return null;
+        }
+        if (!(head.data instanceof Number)) {
             System.err.println("Largest node not possible for non-numeric types.");
             return null;
         }
-
-        ListNode<T> temp = node;
+        ListNode<T> temp = this.head;
         double max = 0.0;
-        ListNode<T> largest = node;
+        ListNode<T> largest = this.head;
         while (temp != null) {
             if (((Number) temp.data).doubleValue() > max) {
                 max = ((Number) temp.data).doubleValue();
@@ -166,27 +180,40 @@ public class ListADT<T> {
         return largest;
     }
 
-    public int searchForIndex(ListNode<T> node, T target) {
+    public int findIndex(ListNode<T> node, T target) {
         if (node == null) {
             System.err.println("List is empty!");
             return -1;
         }
-
-        ListNode<T> temp = node;
-        int index = 0;
+        ListNode<T> temp = node; int index = 0;
         while (temp != null) {
-            if (!temp.data.equals(target)) {
-                index++;
-                temp = temp.next;
-            } else {
+            if (temp.data.equals(target)) {
                 return index;
             }
+            index++;
+            temp = temp.next;
+        }
+        return -1;
+    }
+
+    public int findIndex(T target) {
+        if (size == 0) {
+            System.err.println("List is empty!");
+            return -1;
+        }
+        ListNode<T> temp = this.head; int index = 0;
+        while (temp != null) {
+            if (temp.data.equals(target)) {
+                return index;
+            }
+            index++;
+            temp = temp.next;
         }
         return -1;
     }
 
     public ListNode<T> find(ListNode<T> node, T target) {
-        if (node == null) {
+        if (size == 0) {
             System.err.println("List is empty!");
             return null;
         }
@@ -202,34 +229,54 @@ public class ListADT<T> {
 
     public void insert(T data, int index) {
         ListNode<T> newNode = new ListNode<>(data);
-        int nodeCount = size(newNode);
-        
-        if (head == null) {
+        if (size == 0) {
             System.err.println("List is empty! Creating a new node.");
             head = newNode;
             tail = newNode;
+            size = 1;
         }
         int listIndex = 0; ListNode<T> temp = head;
         if (index == 0) {
             // Insert at start
             newNode.next = head;
             head = newNode;
-        } else if (index == nodeCount-1) {
+            size++;
+        } else if (index == size-1) {
             while (temp.next != null) {
                 temp = temp.next;
             }
             newNode.next = null;
             temp.next = newNode;
             tail = newNode;
-        } else if (0 < index && index < nodeCount-1) {
-            while (listIndex < nodeCount - 1 && temp.next != null) {
+            size++;
+        } else if (0 < index && index < size-1) {
+            while (listIndex < size - 1 && temp.next != null) {
                 temp = temp.next;
                 listIndex++;
             }
             newNode.next = temp.next;
             temp.next = newNode;
+            size++;
         } else {
             System.err.println("Invalid index provided");
         }
+    }
+
+    public void add(T data) {
+        ListNode<T> newNode = new ListNode<>(data);
+        if (size == 0) {
+            head = newNode;
+            tail = newNode;
+            size = 1;
+            return;
+        }
+        ListNode<T> temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        newNode.next = temp.next;
+        temp.next = newNode;
+        tail = newNode;
+        size++;
     }
 }
