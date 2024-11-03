@@ -1,22 +1,10 @@
 package src.learn;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ListADT<T> {
+class ListADT<T> {
     private ListNode<T> head;
     private ListNode<T> tail;
 
     private int size;
-
-    public static void main(String[] args) {
-        Integer[] A = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-        ListADT<Integer> listADT = new ListADT<>();
-        listADT.createList(A);
-        listADT.display();
-
-        System.out.println("Number of nodes in the list: "+listADT.size());
-    }
 
     public int size(ListNode<T> node) {
         if (node == null) {
@@ -278,5 +266,51 @@ public class ListADT<T> {
         temp.next = newNode;
         tail = newNode;
         size++;
+    }
+
+    public ListNode<T> merge(ListADT<T> list) {
+        if (list.head == null) {
+            return this.head;
+        } else if (this.size == 0) {
+            this.head = list.head;
+            int newListSize = size(list.head);
+            if (newListSize == 0) {
+                return null;
+            }
+            ListNode<T> temp = this.head;
+            for (int i = 0; i < newListSize; i++) {
+                temp = temp.next;
+            }
+            this.tail = temp;
+            return this.head;
+        } else {
+            this.tail.next = list.head;
+            ListNode<T> temp = list.head;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            this.tail = temp;
+            return this.head;
+        }
+    }
+}
+
+public class ListLearning {
+    public static void main(String[] args) {
+        Integer[] A = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        Integer[] B = {15, 16, 17};
+
+        ListADT<Integer> listA = new ListADT<>();
+        ListADT<Integer> listB = new ListADT<>();
+
+        listA.createList(A);
+        listB.createList(B);
+
+        listA.display();
+        listB.display();
+
+        listA.merge(listB);
+        listA.display();
+        listB.display();
     }
 }
