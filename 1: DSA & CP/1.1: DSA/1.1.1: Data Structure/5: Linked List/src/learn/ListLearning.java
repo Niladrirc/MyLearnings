@@ -293,6 +293,107 @@ class ListADT<T> {
             return this.head;
         }
     }
+
+    public void remove(T o) {
+        if (size == 0) {
+            System.err.println("List is empty!");
+            return;
+        }
+        ListNode<T> temp = head;
+        ListNode<T> prev = null;
+        while (temp != null) {
+            if (temp.data.equals(o)) {
+                if (prev == null) {
+                    head = temp.next;
+                } else {
+                    prev.next = temp.next;
+                }
+                size--;
+            }
+            prev = temp;
+            temp = temp.next;
+        }
+    }
+
+    public void remove(int index) {
+        if (size == 0) {
+            System.err.println("List is empty!");
+        }
+
+        ListNode<T> temp = head;
+        ListNode<T> prev = null;
+        int i=0;
+        for (i = 0; i < index; i++) {
+            prev = temp;
+            temp = temp.next;
+        }
+        if (i == index) {
+            if (prev == null) {
+                head = temp.next;
+            } else {
+                prev.next = temp.next;
+            }
+            size--;
+        }
+    }
+
+    public boolean isSorted() {
+        if (!(head.data instanceof Comparable)) {
+            System.err.println("Wrong type of list! Elements are not comparable.");
+            return false;
+        }
+        if (size == 0 || size == 1) {
+            System.err.println("Insufficient elements to determine sorting!");
+            return false;
+        }
+        ListNode<T> current = head.next;
+        ListNode<T> prev = head;
+        while (current != null) {
+            if (((Comparable<T>) prev.data).compareTo(current.data) > 0)
+                return false;
+
+            prev = current;
+            current = current.next;
+        }
+        return true;
+    }
+
+    public void removeDuplicates() {
+        if (size == 0) {
+            System.err.println("List is empty!");
+            return;
+        }
+        if (size == 1) {
+            if (head.data.equals(head.next)) {
+                head = head.next;
+            }
+            return;
+        }
+        if (isSorted()) {
+            removeDuplicatesSorted();
+        } else {
+            removeDuplicatesUnsorted();
+        }
+    }
+
+    private void removeDuplicatesUnsorted() {
+    }
+
+    private void removeDuplicatesSorted() {
+        ListNode<T> leading = this.head;
+        ListNode<T> trailing = null;
+        int duplicateCount = 0;
+        while (leading != null) {
+            if (trailing != null && leading.data.equals(trailing.data)) {
+                trailing.next = leading.next;
+                leading = leading.next;
+                duplicateCount++;
+            }
+            trailing = leading;
+            leading = leading.next;
+        }
+        size -= duplicateCount;
+    }
 }
 
 public class ListLearning {
