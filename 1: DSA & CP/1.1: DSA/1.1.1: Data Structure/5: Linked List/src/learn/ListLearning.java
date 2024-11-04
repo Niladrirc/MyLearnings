@@ -1,5 +1,7 @@
 package src.learn;
 
+import java.util.HashMap;
+
 class ListADT<T> {
     private ListNode<T> head;
     private ListNode<T> tail;
@@ -377,6 +379,24 @@ class ListADT<T> {
     }
 
     private void removeDuplicatesUnsorted() {
+        if (size == 0) {
+            System.err.println("List is empty!");
+        }
+
+        ListNode<T> current = head;
+        while (current != null) {
+            ListNode<T> lead = current.next;
+            ListNode<T> trail = current;
+            while (lead != null) {
+                if (lead.data.equals(current.data)) {
+                    trail.next = lead.next;
+                    size--;
+                }
+                trail = lead;
+                lead = lead.next;
+            }
+            current = current.next;
+        }
     }
 
     private void removeDuplicatesSorted() {
@@ -394,24 +414,28 @@ class ListADT<T> {
         }
         size -= duplicateCount;
     }
+
+    public void reverse() {
+        
+    }
 }
 
 public class ListLearning {
     public static void main(String[] args) {
-        Integer[] A = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-        Integer[] B = {15, 16, 17};
+        Integer[] A = { 1, 2, 1, 4, 5, 6, 2, 8, 9, 10 };
 
         ListADT<Integer> listA = new ListADT<>();
-        ListADT<Integer> listB = new ListADT<>();
 
         listA.createList(A);
-        listB.createList(B);
 
         listA.display();
-        listB.display();
 
-        listA.merge(listB);
+        if (listA.isSorted()) {
+            System.out.println("Sorted List");
+        } else
+            System.out.println("Unsorted List");
+
+        listA.removeDuplicates();
         listA.display();
-        listB.display();
     }
 }
