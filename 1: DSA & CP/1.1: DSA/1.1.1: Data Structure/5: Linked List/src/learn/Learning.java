@@ -2,14 +2,22 @@ package src.learn;
 
 public class Learning {
     public static void main(String[] args) {
-        CircularListADT circularList = new CircularListADT();
-        circularList.add(1);
-        circularList.add(2);
-        circularList.add(3);
-        circularList.display();
+        DoublyLinkedList dll = new DoublyLinkedList();
 
-        circularList.remove(2);
-        circularList.display();
+        dll.add(0);
+        dll.add(1);
+        dll.add(2);
+        dll.add(3);
+        dll.add(4);
+        dll.add(5);
+
+        dll.display();
+
+        dll.remove(0);
+        dll.display();
+
+        dll.reverse();
+        dll.display();
 
     }
 }
