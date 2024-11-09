@@ -1,7 +1,5 @@
 package hashing;
 
-import utils.ListNode;
-
 import java.util.Scanner;
 
 public class LinearProbing {
@@ -22,28 +20,27 @@ public class LinearProbing {
             System.out.println("Not found");
     }
 
-    private static int getHash(int key) {
-        return key % 10;
+    private static int getHash(int key, int index, int length) {
+        return (key + index) % length;
     }
 
     private static void insert(int[] hashTable, int key) {
-        int index = getHash(key);
-
-        if (hashTable[index] != 0) {
-            while (hashTable[index] != 0 && index < hashTable.length) {
-                index += 1;
-            }
+        int index = 0;
+        index = getHash(key, index, hashTable.length);
+        while (hashTable[index] != 0 && index < hashTable.length) {
+            index = getHash(key, index+1, hashTable.length);
         }
         hashTable[index] = key;
     }
 
     private static int searchFor(int key, int[] hashTable) {
-        int index = getHash(key);
+        int index = 0;
+        index = getHash(key, index, hashTable.length);
         while (hashTable[index] != 0 && index < hashTable.length) {
             if (hashTable[index] == key) {
                 return index;
             }
-            index += 1;
+            index = getHash(key, index+1, hashTable.length);
         }
         return -1;
     }
