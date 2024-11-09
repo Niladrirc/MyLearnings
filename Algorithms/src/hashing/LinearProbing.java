@@ -20,27 +20,29 @@ public class LinearProbing {
             System.out.println("Not found");
     }
 
-    private static int getHash(int key, int index, int length) {
-        return (key + index) % length;
+    private static int getHash(int key, int length) {
+        return (key) % length;
+    }
+
+    private static int getModifiedHash(int key, int index, int length) {
+        return (getHash(key, length) + index) % length;
     }
 
     private static void insert(int[] hashTable, int key) {
-        int index = 0;
-        index = getHash(key, index, hashTable.length);
+        int index = getHash(key, hashTable.length);
         while (hashTable[index] != 0 && index < hashTable.length) {
-            index = getHash(key, index+1, hashTable.length);
+            index = getModifiedHash(key, index+1, hashTable.length);
         }
         hashTable[index] = key;
     }
 
     private static int searchFor(int key, int[] hashTable) {
-        int index = 0;
-        index = getHash(key, index, hashTable.length);
+        int index = getHash(key, hashTable.length);
         while (hashTable[index] != 0 && index < hashTable.length) {
             if (hashTable[index] == key) {
                 return index;
             }
-            index = getHash(key, index+1, hashTable.length);
+            index = getModifiedHash(key, index+1, hashTable.length);
         }
         return -1;
     }
