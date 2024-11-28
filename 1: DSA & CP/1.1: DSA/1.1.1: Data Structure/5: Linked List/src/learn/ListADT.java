@@ -48,6 +48,58 @@ class ListADT<T> {
         System.out.print(" ]\n");
     }
 
+    public void display(Node<T> node) {
+        if (node == null) {
+            System.err.println("List is empty!");
+            return;
+        }
+        Node<T> temp = node;
+        System.out.print("List: [ ");
+        while (temp != null) {
+            System.out.print(temp.data);
+            temp = temp.next;
+            if (temp != null) {
+                System.out.print(", ");
+            }
+        }
+        System.out.print(" ]");
+        System.out.println();
+    }
+
+    public Node<T> createList(T[] arr) {
+        for (T t : arr) {
+            Node<T> newNode = new Node<>(t);
+            if (head == null) {
+                head = newNode;
+                tail = newNode;
+                this.size = 1;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
+                this.size++;
+            }
+        }
+        return head;
+    }
+
+    public void add(T data) {
+        Node<T> newNode = new Node<>(data);
+        if (size == 0) {
+            head = newNode;
+            tail = newNode;
+            size = 1;
+            return;
+        }
+        Node<T> temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        newNode.next = null;
+        temp.next = newNode;
+        tail = newNode;
+        size++;
+    }
+
     private int indexOf(Object o) {
         Node<T> temp = head;
         if (o != null) {
@@ -80,40 +132,6 @@ class ListADT<T> {
             temp = temp.next;
         }
         return false;
-    }
-
-    public Node<T> createList(T[] arr) {
-        for (T t : arr) {
-            Node<T> newNode = new Node<>(t);
-            if (head == null) {
-                head = newNode;
-                tail = newNode;
-                this.size = 1;
-            } else {
-                tail.next = newNode;
-                tail = newNode;
-                this.size++;
-            }
-        }
-        return head;
-    }
-
-    public void display(Node<T> node) {
-        if (node == null) {
-            System.err.println("List is empty!");
-            return;
-        }
-        Node<T> temp = node;
-        System.out.print("List: [ ");
-        while (temp != null) {
-            System.out.print(temp.data);
-            temp = temp.next;
-            if (temp != null) {
-                System.out.print(", ");
-            }
-        }
-        System.out.print(" ]");
-        System.out.println();
     }
 
     public Object sum(Node<T> node) {
@@ -254,24 +272,6 @@ class ListADT<T> {
         } else {
             System.err.println("Invalid index provided");
         }
-    }
-
-    public void add(T data) {
-        Node<T> newNode = new Node<>(data);
-        if (size == 0) {
-            head = newNode;
-            tail = newNode;
-            size = 1;
-            return;
-        }
-        Node<T> temp = head;
-        while (temp.next != null) {
-            temp = temp.next;
-        }
-        newNode.next = temp.next;
-        temp.next = newNode;
-        tail = newNode;
-        size++;
     }
 
     public Node<T> merge(ListADT<T> list) {
