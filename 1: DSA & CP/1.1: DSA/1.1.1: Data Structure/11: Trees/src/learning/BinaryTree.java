@@ -6,9 +6,10 @@ class BinaryTree {
     private TreeNode root;
     private int size;
 
-    public BinaryTree(int data) {
-        root = new TreeNode(data);
-    }
+    public BinaryTree() {}
+    public BinaryTree(int data) { root = new TreeNode(data); }
+
+
 
     public void createBinaryTree() {
         int data;
@@ -55,19 +56,19 @@ class BinaryTree {
         while (cont) {
             switch (choice) {
                 case 1:
-                    generatePreOrderView();
+                    generatePreOrderView(root);
                     cont = false;
                     break;
                 case 2:
-                    generateInOrderView();
+                    generateInOrderView(root);
                     cont = false;
                     break;
                 case 3:
-                    generatePostOrderView();
+                    generatePostOrderView(root);
                     cont = false;
                     break;
                 case 4:
-                    generateLevelOrderView();
+                    generateLevelOrderView(root);
                     cont = false;
                     break;
                 default:
@@ -76,24 +77,51 @@ class BinaryTree {
         }
     }
 
-    private void generatePreOrderView() {
+    private void generatePreOrderView(TreeNode node) {
         // todo: Generate pre order view
+        if (node == null) return;
+        System.out.print(node.data + " ");
+        generatePreOrderView(node.left);
+        generatePreOrderView(node.right);
     }
 
-    private void generateInOrderView() {
+    private void generateInOrderView(TreeNode node) {
         // todo: Generate in order view
+        if (node == null) return;
+        generateInOrderView(node.left);
+        System.out.print(node.data + " ");
+        generateInOrderView(node.right);
     }
 
-    private void generatePostOrderView() {
+    private void generatePostOrderView(TreeNode node) {
         // todo: Generate post order view
+        if (node == null) return;
+        generatePostOrderView(node.left);
+        generatePostOrderView(node.right);
+        System.out.print(node.data + " ");
     }
 
-    private void generateLevelOrderView() {
+    private void generateLevelOrderView(TreeNode node) {
         // todo: Generate level order view
+        QueueADT<TreeNode> q = new QueueADT<>();
+        System.out.print(node.data + " ");
+        q.enqueue(root);
+        while (!q.isEmpty()) {
+            TreeNode current = q.dequeue();
+            if (current.left != null) {
+                System.out.print(current.left.data + " ");
+                q.enqueue(current.left);
+            }
+            if (current.right != null) {
+                System.out.print(current.right.data + " ");
+                q.enqueue(current.right);
+            }
+        }
     }
 
     public static void main(String[] args) {
-        BinaryTree tree = new BinaryTree(1);
+        BinaryTree tree = new BinaryTree();
+        tree.createBinaryTree();
     }
 
 }
