@@ -3,8 +3,14 @@ package src.learn;
 class ListADT<T> {
     private Node<T> head;
     private Node<T> tail;
-
     private int size;
+
+    public ListADT(T value) {
+        Node<T> newNode = new Node<>(value);
+        head = newNode;
+        tail = newNode;
+        size = 1;
+    }
 
     public int size(Node<T> node) {
         if (node == null) {
@@ -23,6 +29,23 @@ class ListADT<T> {
 
     public boolean contains(Object o) {
         return indexOf(o) > 0;
+    }
+
+    public void display() {
+        if (size == 0) {
+            System.err.println("List is empty!");
+            return;
+        }
+        Node<T> temp = this.head;
+        System.out.print("List: [ ");
+        while (temp != null) {
+            System.out.print(temp.data);
+            temp = temp.next;
+            if (temp != null) {
+                System.out.print(", ");
+            }
+        }
+        System.out.print(" ]\n");
     }
 
     private int indexOf(Object o) {
@@ -73,23 +96,6 @@ class ListADT<T> {
             }
         }
         return head;
-    }
-
-    public void display() {
-        if (size == 0) {
-            System.err.println("List is empty!");
-            return;
-        }
-        Node<T> temp = this.head;
-        System.out.print("List: [ ");
-        while (temp != null) {
-            System.out.print(temp.data);
-            temp = temp.next;
-            if (temp != null) {
-                System.out.print(", ");
-            }
-        }
-        System.out.print(" ]\n");
     }
 
     public void display(Node<T> node) {
