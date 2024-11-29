@@ -1,7 +1,7 @@
 package src.learning;
 
 public class QueueADT<T> {
-    static class Node<E> {
+    private class Node<E> {
         E data;
         Node<E> next;
         public Node() {}
@@ -32,12 +32,14 @@ public class QueueADT<T> {
         if (isEmpty()) {
             first = newNode;
             size = 1;
+            return;
         }
         Node<T> temp = first;
         while(temp.next != null) {
             temp = temp.next;
         }
         temp.next = newNode;
+        size += 1;
     }
 
     public T dequeue() {
@@ -47,6 +49,7 @@ public class QueueADT<T> {
         }
         T data = first.data;
         first = first.next;
+        size -= 1;
         return data;
     }
 
