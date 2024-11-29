@@ -1,5 +1,7 @@
 package src.learning;
 
+import com.sun.source.tree.Tree;
+
 import java.util.*;
 
 class BinaryTree {
@@ -15,7 +17,7 @@ class BinaryTree {
         int data;
         QueueADT<TreeNode> q = new QueueADT<>();
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter root data: ");
+        System.out.print("Enter root data: ");
         data = sc.nextInt();
         TreeNode newNode = new TreeNode(data);
         root = newNode;
@@ -24,7 +26,7 @@ class BinaryTree {
         while (!q.isEmpty()) {
             TreeNode node = q.dequeue();
 
-            System.out.println("Enter left child data: ");
+            System.out.print("Enter left child for " + node.data + ": ");
             data = sc.nextInt();
             if (data != -1) {
                 TreeNode leftChild = new TreeNode(data);
@@ -32,7 +34,7 @@ class BinaryTree {
                 q.enqueue(leftChild);
             }
 
-            System.out.println("Enter right child data: ");
+            System.out.print("Enter right child for " + node.data + ": ");
             data = sc.nextInt();
             if (data != -1) {
                 TreeNode rightChild = new TreeNode(data);
@@ -85,6 +87,21 @@ class BinaryTree {
         generatePreOrderView(node.right);
     }
 
+    private void generatePreOrderViewIterative(TreeNode node) {
+        StackADT<TreeNode> stk = new StackADT<>();
+
+        while (node != null || !stk.isEmpty()) {
+            if (node != null) {
+                System.out.print(node.data + " ");
+                stk.push(node);
+                node = node.left;
+            } else {
+                node = stk.pop();
+                node = node.right;
+            }
+        }
+    }
+
     private void generateInOrderView(TreeNode node) {
         // todo: Generate in order view
         if (node == null) return;
@@ -93,12 +110,39 @@ class BinaryTree {
         generateInOrderView(node.right);
     }
 
+    private void generateInOrderViewIterative(TreeNode node) {
+        StackADT<TreeNode> stk = new StackADT<>();
+        while (node != null || !stk.isEmpty()) {
+            if (node != null) {
+                stk.push(node);
+                node = node.left;
+            } else {
+                node = stk.pop();
+                System.out.print(node.data + " ");
+                node = node.right;
+            }
+        }
+    }
+
     private void generatePostOrderView(TreeNode node) {
         // todo: Generate post order view
         if (node == null) return;
         generatePostOrderView(node.left);
         generatePostOrderView(node.right);
         System.out.print(node.data + " ");
+    }
+
+    private void generatePostOrderViewIterative(TreeNode node) {
+        StackADT<TreeNode> stk = new StackADT<>();
+        while (node != null || !stk.isEmpty()) {
+            if (node != null) {
+                stk.push(node);
+                node = node.left;
+            } else {
+                node = stk.pop();
+
+            }
+        }
     }
 
     private void generateLevelOrderView(TreeNode node) {
@@ -116,6 +160,61 @@ class BinaryTree {
                 System.out.print(current.right.data + " ");
                 q.enqueue(current.right);
             }
+        }
+    }
+
+    public int getNodeCount(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int x = getNodeCount(node.left);
+        int y = getNodeCount(node.right);
+        return (x+y+1);
+    }
+
+    public int getTreeHeight(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int x = getTreeHeight(node.left);
+        int y = getTreeHeight(node.right);
+        int max = Math.max(x, y);
+        return (max+1);
+    }
+
+    public int getNodeCountWithDegreeTwo(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int x = getNodeCountWithDegreeTwo(node.left);
+        int y = getNodeCountWithDegreeTwo(node.right);
+
+        if (node.left != null && node.right != null) {
+            return (x+y+1);
+        } else {
+            return (x+y);
+        }
+    }
+
+    public int getNodeSum(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int x = getNodeSum(node.left);
+        int y = getNodeSum(node.right);
+        return (x + y + node.data);
+    }
+
+    public int getLeafNodeCount(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int x = getLeafNodeCount(node.left);
+        int y = getLeafNodeCount(node.right);
+        if (node.left == null && node.right == null) {
+            return (x + y + 1);
+        } else {
+            return (x + y);
         }
     }
 
