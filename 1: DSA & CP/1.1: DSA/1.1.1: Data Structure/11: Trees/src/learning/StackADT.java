@@ -35,6 +35,10 @@ public class StackADT<T> {
         }
     }
 
+    public T peek() {
+        return top.data;
+    }
+
     public T pop() {
         if (isEmpty()) {
             System.out.println("Stack is empty");
