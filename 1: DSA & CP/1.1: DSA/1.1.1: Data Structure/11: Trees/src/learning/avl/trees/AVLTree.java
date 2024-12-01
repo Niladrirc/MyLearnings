@@ -82,13 +82,32 @@ public class AVLTree {
         return node;
     }
 
-    private AVLNode getLLRotatedSubtree(AVLNode node) {
+    private AVLNode getLLRotatedSubtree(AVLNode p) {
+        AVLNode pl = p.left;
+        AVLNode plr = pl.right;
+
+        p.left = plr;
+        pl.right = p;
+
+        p.height = treeHeight(p);
+        pl.height = treeHeight(pl);
+
+        if (root == p) {
+            root = pl;
+        }
+
+        return pl;
     }
 
     private AVLNode getRRRotatedSubtree(AVLNode node) {
+
     }
 
-    private AVLNode getLRRotatedSubtree(AVLNode node) {
+    private AVLNode getLRRotatedSubtree(AVLNode p) {
+        AVLNode pl = p.left;
+        AVLNode plr = p.right;
+
+        plr.
     }
 
     private AVLNode getRLRotatedSubtree(AVLNode node) {
