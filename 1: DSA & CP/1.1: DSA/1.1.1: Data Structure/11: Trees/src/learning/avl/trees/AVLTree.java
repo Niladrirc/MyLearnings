@@ -70,11 +70,28 @@ public class AVLTree {
          * 3. LR rotation -> currentNode's balance_factor = 2 & currentNode.right's balance_factor = -1
          * 4. RL rotation -> currentNode's balance_factor = -2 & currentNode.right's balance_factor = 1
          */
-        if (getBalanceFactor(node) == 2 && getBalanceFactor(node.left) == 1) {//todo LL rotation logic }
-        if (getBalanceFactor(node) == -2 && getBalanceFactor(node.left) == -1) { //todo RR rotation logic }
-        if (getBalanceFactor(node) == 2 && getBalanceFactor(node.left) == -1) { // todo LR rotation logic }
-        if (getBalanceFactor(node) == -2 && getBalanceFactor(node.left) == 1) { // todo RL rotation logic }
+        if (getBalanceFactor(node) == 2 && getBalanceFactor(node.left) == 1) {
+            return getLLRotatedSubtree(node);
+        } else if (getBalanceFactor(node) == -2 && getBalanceFactor(node.left) == -1) {
+            return getRRRotatedSubtree(node);
+        } else if (getBalanceFactor(node) == 2 && getBalanceFactor(node.left) == -1) {
+            return getLRRotatedSubtree(node);
+        } else if (getBalanceFactor(node) == -2 && getBalanceFactor(node.left) == 1) {
+            return getRLRotatedSubtree(node);
+        }
         return node;
+    }
+
+    private AVLNode getLLRotatedSubtree(AVLNode node) {
+    }
+
+    private AVLNode getRRRotatedSubtree(AVLNode node) {
+    }
+
+    private AVLNode getLRRotatedSubtree(AVLNode node) {
+    }
+
+    private AVLNode getRLRotatedSubtree(AVLNode node) {
     }
 
     public static void main(String[] args) {
