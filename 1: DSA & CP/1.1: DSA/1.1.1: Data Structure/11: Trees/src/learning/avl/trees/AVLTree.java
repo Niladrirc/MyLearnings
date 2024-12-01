@@ -99,18 +99,33 @@ public class AVLTree {
         return pl;
     }
 
-    private AVLNode getRRRotatedSubtree(AVLNode node) {
-
+    private AVLNode getRRRotatedSubtree(AVLNode p) {
+        return null;
     }
 
     private AVLNode getLRRotatedSubtree(AVLNode p) {
         AVLNode pl = p.left;
         AVLNode plr = p.right;
 
-        plr.
+        pl.right = plr.left;
+        p.left = plr.right;
+
+        plr.left = pl;
+        plr.right = p;
+
+        pl.height = treeHeight(pl);
+        p.height = treeHeight(p);
+        plr.height = treeHeight(plr);
+
+        if (root == p) {
+            root = plr;
+        }
+
+        return plr;
     }
 
     private AVLNode getRLRotatedSubtree(AVLNode node) {
+        return null;
     }
 
     public static void main(String[] args) {
