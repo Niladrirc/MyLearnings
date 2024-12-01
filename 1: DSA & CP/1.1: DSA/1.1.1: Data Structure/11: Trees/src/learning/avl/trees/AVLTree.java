@@ -100,7 +100,19 @@ public class AVLTree {
     }
 
     private AVLNode getRRRotatedSubtree(AVLNode p) {
-        return null;
+        AVLNode pr = p.right;
+        AVLNode prr = pr.right;
+
+        p.right = pr.left;
+        pr.left = p;
+
+        p.height = treeHeight(p);
+        pr.height = treeHeight(pr);
+
+        if (root == p) {
+            root = pr;
+        }
+        return pr;
     }
 
     private AVLNode getLRRotatedSubtree(AVLNode p) {
