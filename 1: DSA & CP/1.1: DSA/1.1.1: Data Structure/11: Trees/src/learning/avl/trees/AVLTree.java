@@ -24,7 +24,7 @@ public class AVLTree {
         if (root == null) {
             return false;
         }
-        TreeNode current = root;
+        AVLNode current = root;
         while (current != null) {
             if (current.data == key) {
                 return true;
