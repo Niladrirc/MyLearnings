@@ -49,6 +49,26 @@ public class HeapADT {
         }
     }
 
+    public int delete() {
+        int deletedElement = heapArray[1];
+
+        heapArray[1] = heapArray[size];
+        size -= 1;
+
+        int index = 1;
+        while (index <= size) {
+            int swapIndex = heapArray[2*index] > heapArray[2*(index+1)] ? 2*index : 2*(index+1);
+            if (heapArray[index] < heapArray[swapIndex]) {
+                int temp = heapArray[index];
+                heapArray[index] = heapArray[swapIndex];
+                heapArray[swapIndex] = temp;
+            }
+            index = swapIndex;
+        }
+
+        return deletedElement;
+    }
+
     public static void main(String[] args) {
         HeapADT heap = new HeapADT();
         heap.insert(10);
