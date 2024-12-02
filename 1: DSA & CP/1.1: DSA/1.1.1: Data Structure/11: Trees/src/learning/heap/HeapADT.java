@@ -40,11 +40,10 @@ public class HeapADT {
     public void createHeapInPlace(int[] arr) {
         for (int i=1; i<arr.length; i++) {
             int newElement = arr[i];
-            int index = i-1;
-            while ((index/2)>0 && (newElement > arr[index/2])) {
-                int correctedIndex = 
-                arr[index+1] = arr[(index+1)/2];
-                index /= 2;
+            int index = i;
+            while (index>0 && (newElement > arr[(index-1)/2])) {
+                arr[index] = arr[(index-1)/2];
+                index = (index-1)/2;
             }
             arr[index] = newElement;
         }
