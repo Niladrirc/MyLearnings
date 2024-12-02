@@ -1,5 +1,7 @@
 package src.learning.heap;
 
+import java.util.Arrays;
+
 public class HeapADT {
     private int[] heapArray;
     private int size;
@@ -35,9 +37,16 @@ public class HeapADT {
         size += 1;
     }
 
-    public void createHeap(int[] arr) {
-        if (getSize() != 0) {
-            System.out.println("Heap already has some elements.");
+    public void createHeapInPlace(int[] arr) {
+        for (int i=1; i<arr.length; i++) {
+            int newElement = arr[i];
+            int index = i-1;
+            while ((index/2)>0 && (newElement > arr[index/2])) {
+                int correctedIndex = 
+                arr[index+1] = arr[(index+1)/2];
+                index /= 2;
+            }
+            arr[index] = newElement;
         }
     }
 
@@ -47,5 +56,9 @@ public class HeapADT {
         heap.insert(20);
         heap.insert(30);
         heap.insert(40);
+
+        int[] arr = {10,20,30,25,5,40,35};
+        heap.createHeapInPlace(arr);
+        System.out.println(Arrays.toString(arr));
     }
 }
