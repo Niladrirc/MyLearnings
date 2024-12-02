@@ -65,7 +65,7 @@ public class HeapADT {
             }
             index = swapIndex;
         }
-
+        heapArray[size+1] = deletedElement;
         return deletedElement;
     }
 
