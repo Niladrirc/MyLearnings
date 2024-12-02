@@ -49,6 +49,16 @@ public class HeapADT {
         }
     }
 
+    public void createHeap(int[] arr) {
+        if (getSize() > 0) {
+            System.out.println("Heap not empty. Cannot create a new Heap with given array");
+            return;
+        }
+        for (int i=0; i<arr.length; i++) {
+            this.insert(arr[i]);
+        }
+    }
+
     public int delete() {
         int deletedElement = heapArray[1];
 
@@ -67,6 +77,10 @@ public class HeapADT {
         }
         heapArray[size+1] = deletedElement;
         return deletedElement;
+    }
+
+    public int[] heapSort(int[] arr) {
+        
     }
 
     public static void main(String[] args) {
