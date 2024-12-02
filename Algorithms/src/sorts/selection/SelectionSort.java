@@ -16,8 +16,7 @@ public class SelectionSort {
         for (int i=0; i<n-1; i++) {
             int j=i, k=i;
             while (j <= n-1) {
-                if (a[j] < a[k])
-                    k=j;
+                if (a[j] < a[k]) k=j;
                 j++;
             }
             if (k != i) {
