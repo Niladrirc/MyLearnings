@@ -49,14 +49,15 @@ public class HeapADT {
         }
     }
 
-    public void createHeap(int[] arr) {
+    public int[] createHeap(int[] arr) {
         if (getSize() > 0) {
             System.out.println("Heap not empty. Cannot create a new Heap with given array");
-            return;
+            return null;
         }
         for (int i=0; i<arr.length; i++) {
             this.insert(arr[i]);
         }
+        return arr;
     }
 
     public int delete() {
@@ -66,8 +67,8 @@ public class HeapADT {
         size -= 1;
 
         int index = 1;
-        while (index <= size) {
-            int swapIndex = heapArray[2*index] > heapArray[2*(index+1)] ? 2*index : 2*(index+1);
+        while ((2*index)+1 <= size) {
+            int swapIndex = heapArray[2*index] > heapArray[(2*index)+1] ? 2*index : (2*index)+1;
             if (heapArray[index] < heapArray[swapIndex]) {
                 int temp = heapArray[index];
                 heapArray[index] = heapArray[swapIndex];
@@ -80,18 +81,27 @@ public class HeapADT {
     }
 
     public int[] heapSort(int[] arr) {
-        
+        createHeap(arr);
+        int heapSize = this.size;
+
+        for (int i=0; i<arr.length; i++) {
+            this.delete();
+        }
+        System.out.print("[ ");
+        for (int i=1; i<=heapSize; i++) {
+            if (i<heapSize)
+                System.out.print(heapArray[i]+", ");
+            else
+                System.out.print(heapArray[i]+" ]");
+        }
+        System.out.println();
+        return arr;
     }
 
     public static void main(String[] args) {
         HeapADT heap = new HeapADT();
-        heap.insert(10);
-        heap.insert(20);
-        heap.insert(30);
-        heap.insert(40);
-
         int[] arr = {10,20,30,25,5,40,35};
-        heap.createHeapInPlace(arr);
+        heap.heapSort(arr);
         System.out.println(Arrays.toString(arr));
     }
 }
