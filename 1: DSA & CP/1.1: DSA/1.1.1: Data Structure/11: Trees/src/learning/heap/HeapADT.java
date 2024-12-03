@@ -5,14 +5,26 @@ import java.util.Arrays;
 public class HeapADT {
     private int[] heapArray;
     private int size;
+    private int length;
 
     public HeapADT() {
-        heapArray = new int[10];
         size = 0;
+    }
+
+    public void setHeapArray(int length) {
+        this.heapArray = heapArray;
     }
 
     public int getSize() {
         return this.size;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
     }
 
     public void insert(int value) {
@@ -49,7 +61,7 @@ public class HeapADT {
         }
     }
 
-    public int[] createHeap(int[] arr) {
+    public int[] createHeap(int[] arr, int n) {
         if (getSize() > 0) {
             System.out.println("Heap not empty. Cannot create a new Heap with given array");
             return null;
@@ -80,8 +92,8 @@ public class HeapADT {
         return deletedElement;
     }
 
-    public int[] heapSort(int[] arr) {
-        createHeap(arr);
+    public int[] heapSort(int[] arr, int n) {
+        createHeap(arr, n);
         int heapSize = this.size;
 
         for (int i=0; i<arr.length; i++) {
@@ -101,7 +113,7 @@ public class HeapADT {
     public static void main(String[] args) {
         HeapADT heap = new HeapADT();
         int[] arr = {10,20,30,25,5,40,35};
-        heap.heapSort(arr);
+        heap.heapSort(arr, arr.length);
         System.out.println(Arrays.toString(arr));
     }
 }
