@@ -37,3 +37,11 @@ It creates a thread pool and uses those threads to assign these partitioned task
 
     ### Result Aggregation
     Once processing is completed, the result from all the concurrent task/thread is merged to produce the final result.
+
+## When not to use Parallel Streams
+- Small data sets
+- Sequential dependencies
+- Non-thread-safe operations
+- I/O bound operations
+- Resource constraints
+- Order sensitive operations
