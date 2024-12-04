@@ -34,7 +34,25 @@ public class NumericStreamExample {
         Stream<Integer> stream = list.stream();
         IntStream intStream = stream.mapToInt(Integer::intValue);
 
-        
+        // Converting intstream to stream of strings, double long etc
+
+        int[] numbers = {1,2,3,4,5};
+
+        IntStream.of(numbers)
+                .mapToObj(Integer::toString)
+                .forEach(System.out::print);
+
+        IntStream.of(numbers)
+                .mapToObj(num-> " "+num)
+                .forEach(System.out::print);
+
+        IntStream.of(numbers)
+                .mapToDouble(Math::sqrt)
+                .forEach(System.out::println);
+
+        IntStream.of(numbers)
+                .mapToLong(num-> (long) Math.pow(num,2))
+                .forEach(System.out::println);
 
     }
 }
