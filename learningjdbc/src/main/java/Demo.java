@@ -21,7 +21,7 @@ public class Demo {
         // Registering the driver
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String sql = "SELECT * FROM employees limit 10;";
+            String sql = "SELECT * FROM employees where emp_no=1;";
             String url = "jdbc:mysql://localhost:3306/employees";
             String user = "root";
             String password = "Machine@123";
