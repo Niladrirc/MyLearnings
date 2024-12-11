@@ -11,7 +11,7 @@ public class DiscountProvider implements Provider<Discountable> {
     private final Map<Integer, Discountable> mapBinder;
 
     @Inject
-    public DiscountProvider(Random random, Map<Integer, Discountable> mapBinder) {
+    public DiscountProvider(Map<Integer, Discountable> mapBinder, Random random) {
         // The map contains all the implementations & it facilitates the Factory get method
         this.random = random;
         this.mapBinder = mapBinder;
