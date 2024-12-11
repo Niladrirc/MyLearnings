@@ -1,6 +1,7 @@
-package discount_example.basic.impl.impl;
+package provider.implicitProvider.impl;
 
-import discount_example.basic.Discountable;
+
+import provider.implicitProvider.Discountable;
 
 public class EarlyBirdDiscount implements Discountable {
     @Override

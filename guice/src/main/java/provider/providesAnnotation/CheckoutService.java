@@ -1,4 +1,4 @@
-package discount_example.provider.diIntoProvider;
+package provider.providesAnnotation;
 
 import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
@@ -12,16 +12,13 @@ public class CheckoutService {
         this.discountable = discountable;
     }
 
-    public double checkout(double cartTotal) {
+    public void checkout(double cartAmount) {
         double discount = discountable.getDiscount();
-
-        double totalCartValue = cartTotal - (cartTotal * discount);
+        double totalAfterDiscount = cartAmount - (cartAmount * discount);
         log.info("Shopping cart initially {} with a discount of {}% = {}",
-                cartTotal,
+                cartAmount,
                 discount*100,
-                totalCartValue
+                totalAfterDiscount
         );
-
-        return totalCartValue;
     }
 }

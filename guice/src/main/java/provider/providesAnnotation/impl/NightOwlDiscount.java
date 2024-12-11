@@ -1,10 +1,10 @@
-package discount_example.basic.impl.impl;
+package provider.providesAnnotation.impl;
 
-import discount_example.basic.Discountable;
+import provider.providesAnnotation.Discountable;
 
 public class NightOwlDiscount implements Discountable {
     @Override
     public double getDiscount() {
-        return 0.35;
+        return 0.35D;
     }
 }

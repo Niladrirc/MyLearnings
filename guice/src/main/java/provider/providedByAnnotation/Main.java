@@ -1,12 +1,12 @@
-package discount_example.basic;
+package provider.providedByAnnotation;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import discount_example.basic.guice.DiscountGuiceModule;
+import provider.providedByAnnotation.guice.DiscountModule;
 
 public class Main {
     public static void main(String[] args) {
-        Injector injector = Guice.createInjector(new DiscountGuiceModule());
+        Injector injector = Guice.createInjector(new DiscountModule());
         CheckoutService service = injector.getInstance(CheckoutService.class);
 
         service.checkout(100.00D);

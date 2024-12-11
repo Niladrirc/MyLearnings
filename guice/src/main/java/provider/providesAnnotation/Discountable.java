@@ -1,4 +1,4 @@
-package discount_example.provider.diIntoProvider;
+package provider.providesAnnotation;
 
 public interface Discountable {
     double getDiscount();
