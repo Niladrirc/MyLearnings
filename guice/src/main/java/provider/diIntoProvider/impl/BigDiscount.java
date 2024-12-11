@@ -1,6 +1,6 @@
-package discount_example.provider.diIntoProvider.impl;
+package provider.diIntoProvider.impl;
 
-import discount_example.provider.diIntoProvider.Discountable;
+import provider.diIntoProvider.Discountable;
 
 public class BigDiscount implements Discountable {
     @Override

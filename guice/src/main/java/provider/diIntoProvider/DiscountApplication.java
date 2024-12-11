@@ -1,4 +1,4 @@
-package discount_example.provider.diIntoProvider;
+package provider.diIntoProvider;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -10,7 +10,7 @@ public class DiscountApplication {
     @Inject
     public DiscountApplication(CheckoutService service) {
         this.service = service;
-    }
+    } 
 
     public static void main(String[] args) {
         // the main() should do 3 things:

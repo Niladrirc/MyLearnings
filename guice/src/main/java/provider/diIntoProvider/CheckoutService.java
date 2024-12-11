@@ -1,4 +1,4 @@
-package discount_example.provider.diIntoProvider;
+package provider.diIntoProvider;
 
 import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;

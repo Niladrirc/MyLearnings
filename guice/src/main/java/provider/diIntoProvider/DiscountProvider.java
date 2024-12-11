@@ -1,4 +1,4 @@
-package discount_example.provider.diIntoProvider;
+package provider.diIntoProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -12,6 +12,7 @@ public class DiscountProvider implements Provider<Discountable> {
 
     @Inject
     public DiscountProvider(Random random, Map<Integer, Discountable> mapBinder) {
+        // The map contains all the implementations & it facilitates the Factory get method
         this.random = random;
         this.mapBinder = mapBinder;
     }
