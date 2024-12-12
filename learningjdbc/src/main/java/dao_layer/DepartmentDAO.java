@@ -18,7 +18,7 @@ public class DepartmentDAO {
         try {
             String query = "SELECT * from `departments` where `dept_no`=?";
             Connection conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(query));
+            PreparedStatement st = conn.prepareStatement(query);
             st.setString(1, departmentId);
             ResultSet rs = st.executeQuery();
             rs.next();
@@ -49,11 +49,13 @@ public class DepartmentDAO {
     }
 
     private Connection getConnection() {
+        Connection conn;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employees", "root", "Machine@123");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employees", "root", "Machine@123");
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        return conn;
     }
 }
