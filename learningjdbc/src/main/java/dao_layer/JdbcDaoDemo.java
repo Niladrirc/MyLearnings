@@ -29,5 +29,10 @@ public class JdbcDaoDemo {
     private void run() {
         Department dept = deptAccessObj.getDepartment("d009");
         log.info("DepartmentID: [{}] | DepartmentName: [{}]", dept.getDepartmentId(), dept.getDepartmentName());
+
+        Department newDept = new Department("d010", "Engineering");
+        deptAccessObj.addDepartment(newDept);
+
+        
     }
 }
