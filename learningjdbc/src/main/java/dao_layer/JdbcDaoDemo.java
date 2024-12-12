@@ -33,6 +33,9 @@ public class JdbcDaoDemo {
         Department newDept = new Department("d010", "Engineering");
         deptAccessObj.addDepartment(newDept);
 
-        
+        Department newCreatedDept = deptAccessObj.getDepartment("d010");
+        log.info("DepartmentID: [{}] | DepartmentName: [{}]", dept.getDepartmentId(), dept.getDepartmentName());
+
+        deptAccessObj.deleteDepartment("d010");
     }
 }
