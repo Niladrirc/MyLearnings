@@ -1,6 +1,6 @@
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.io.Serializable;
+import java.io.*;
 
 public class A implements Serializable {
 
@@ -29,5 +29,19 @@ public class A implements Serializable {
     public void setB(int b) {
         System.out.println("Setting b value");
         this.b = b;
+    }
+
+    @Serial
+    private void writeObject(ObjectOutputStream oos) throws IOException {
+        oos.defaultWriteObject();
+        int c = a+20;
+        oos.writeInt(c);
+    }
+
+    @Serial
+    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        ois.defaultReadObject();
+        int c = ois.readInt();
+        System.out.println("Custom value c = "+c);
     }
 }
