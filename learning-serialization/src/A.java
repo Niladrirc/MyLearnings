@@ -1,11 +1,14 @@
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 public class A implements Serializable {
+
     private int a=10;
     private int b=20;
 
     public A() {
-        System.out.println("Inside default constructor of A class");
+        System.out.println("Inside non-parametrized constructor of A class");
     }
 
     public int getA() {
@@ -13,10 +16,10 @@ public class A implements Serializable {
         return a;
     }
 
-    public void setA(int a) {
-        System.out.println("Setting a value");
-        this.a = a;
-    }
+//    public void setA(int a) {
+//        System.out.println("Setting a value");
+//        this.a = a;
+//    }
 
     public int getB() {
         System.out.println("Returning b value");
