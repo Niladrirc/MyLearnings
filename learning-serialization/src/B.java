@@ -1,7 +1,7 @@
 import java.io.Serializable;
 
 public class B implements Serializable {
-    private A a = new A();
+    private A a = new A(5);
 
     public B() {
         System.out.println("Inside non-parametrized constructor of B class");
