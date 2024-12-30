@@ -1,6 +1,6 @@
-package creationalDesignPatterns.abstractFactory.logistics;
+package creationalDesignPatterns.factory.logistics;
 
-import creationalDesignPatterns.abstractFactory.transport.Transport;
+import creationalDesignPatterns.factory.transport.Transport;
 
 public abstract class Logistics {
     public abstract Transport createTransport();

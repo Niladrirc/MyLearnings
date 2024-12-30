@@ -1,4 +1,4 @@
-package creationalDesignPatterns.abstractFactory.transport;
+package creationalDesignPatterns.factory.transport;
 
 public class Ship implements Transport {
     @Override
