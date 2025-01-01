@@ -1,4 +1,4 @@
-package creationalDesignPatterns.abstractFactory.products;
+package creationalDesignPatterns.abstractFactory;
 
 public interface Chair {
     void hasLegs();
