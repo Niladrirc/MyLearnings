@@ -1,5 +1,3 @@
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.*;
 
 public class A implements Serializable {

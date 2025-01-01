@@ -5,7 +5,7 @@ import java.io.ObjectOutputStream;
 
 public class CustomSerializationExample {
     public static void main(String[] args) throws Exception {
-        A a = new A();
+        A a = new A(5);
         FileOutputStream fos = new FileOutputStream("./A.json");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(a);

@@ -1,12 +1,18 @@
 package com.learning;
 
 
-import com.learning.entity.Dish;
+import com.learning.entity.*;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+
+import javax.imageio.spi.ServiceRegistry;
 
 @Slf4j
 public class Main {
@@ -15,21 +21,23 @@ public class Main {
         Dish biryani = new Dish();
         biryani.setName("Biryani");
         biryani.setPrice(120.00D);
+        try {
+            StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                    .configure("hibernate.cfg.xml")
+                    .build();
+            MetadataSources sources = new MetadataSources(serviceRegistry);
 
-        Configuration config = new Configuration().configure("hibernate.cfg.xml");
+            Metadata metadata = sources.buildMetadata();
+            SessionFactory sessionFactory = metadata.buildSessionFactory();
 
-        try (SessionFactory sessionFactory = config.buildSessionFactory()) {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
-            try {
-                Dish dish = session.get(Dish.class, 1);
-                System.out.println(dish);
-                transaction.commit();
-            } catch (Exception e) {
-                log.error("Error while inserting", e);
-                transaction.rollback();
-            }
+            session.save(biryani);
 
+            transaction.commit();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

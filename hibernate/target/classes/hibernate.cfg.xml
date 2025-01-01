@@ -9,11 +9,21 @@
     <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
     <property name="connection.username">root</property>
     <property name="connection.password">Machine@123</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
 
     <!-- DB schema will be updated if needed -->
      <property name="hibernate.hbm2ddl.auto">update</property>
 
+    <!-- show the queries being run in logs -->
     <property name="show_sql">true</property>
+
+    <!-- ehcache setup for level2 caching -->
+<!--    <property name="current_session_context_class">thread</property>-->
+<!--    <property name="cache.use_second_level_cache">true</property>-->
+<!--    <property name="hibernate.cache.use_query_cache">true</property>-->
+<!--    <property name="hibernate.cache.use_structured_entries">true</property>-->
+<!--    <property name="hibernate.cache.r">.</property>-->
+<!--    <property name="hibernate.cache.region.factory_class">org.hibernate.cache.spi.RegionFactory</property>-->
 
     <!-- Mappings -->
     <mapping class="com.learning.entity.Dish"/>
