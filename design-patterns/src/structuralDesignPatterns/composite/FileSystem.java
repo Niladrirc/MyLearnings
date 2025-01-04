@@ -1,8 +1,9 @@
 package structuralDesignPatterns.composite;
 
-public class FileSystem {
-    public static void main(String[] args) {
-        File file = new File("Niladri");
-        file.ls();
-    }
+public interface FileSystem {
+    void setAsReadable(boolean readable);
+    void setAdWriteable(boolean writeable);
+    void setAsExecutable(boolean executable);
+    void chmod(String pattern);
+    void ls();
 }
