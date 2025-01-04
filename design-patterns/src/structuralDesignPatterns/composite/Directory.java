@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Directory implements FileComponent {
-    private List<FileComponent> fileComponents;
+public class Directory implements FileSystem {
+    private List<FileSystem> fileSystems;
     private final String name;
     private boolean executable;
     private boolean readable;
@@ -15,15 +15,15 @@ public class Directory implements FileComponent {
 
     public Directory(String name) {
         this.name = name;
-        fileComponents = new ArrayList<>();
+        fileSystems = new ArrayList<>();
         this.executable = false;
         this.readable = true;
         this.writeable = true;
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
-    public void addFile(FileComponent fileComponent) {
-        fileComponents.add(fileComponent);
+    public void addFile(FileSystem fileSystem) {
+        fileSystems.add(fileSystem);
     }
 
     @Override
@@ -86,9 +86,9 @@ public class Directory implements FileComponent {
         char isExecutable = executable ? 'x' : '-';
         System.out.println(String.valueOf(isReadable)+String.valueOf(isWriteable)+String.valueOf(isExecutable)+" "+
                 timestamp+ " " + name);
-        for (FileComponent fileComponent : fileComponents) {
+        for (FileSystem fileSystem : fileSystems) {
             System.out.print("\t");
-            fileComponent.ls();
+            fileSystem.ls();
         }
     }
 }
