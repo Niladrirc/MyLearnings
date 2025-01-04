@@ -3,7 +3,7 @@ package structuralDesignPatterns.composite;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class File implements FileComponent {
+public class File implements FileSystem {
     private final String name;
     private boolean executable;
     private boolean readable;
