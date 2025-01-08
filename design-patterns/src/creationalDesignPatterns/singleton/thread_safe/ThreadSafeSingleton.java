@@ -1,4 +1,4 @@
-package structuralDesignPatterns;
+package creationalDesignPatterns.singleton.thread_safe;
 
 public class ThreadSafeSingleton {
     private static ThreadSafeSingleton instance;
