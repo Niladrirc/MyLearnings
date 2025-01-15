@@ -1,16 +1,25 @@
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        ProcessingThreads pt = new ProcessingThreads();
 
-        Thread t1 = new Thread(pt, "t1");
-        Thread t2 = new Thread(pt, "t2");
-        // thread start
-        t1.start();
-        t2.start();
-        //wait for thread to finish processing
-        t1.join();
-        t2.join();
-        System.out.println("Processing count="+pt.getCount());
+        System.out.println("Main is starting");
+        RunnableImplementer ri = new RunnableImplementer();
+
+        Thread t = new ThreadExtender("ThreadExtender"); // Should not be used as it has limitations
+        Thread rit = new Thread(ri, "RunnableImplementer"); // Should be used more often
+
+
+        // Better way
+        Thread thread = new Thread(() -> {
+            for (int i = 1; i < 5; i++) {
+                System.out.println("Inside thread: " + Thread.currentThread().getName());
+            }
+        },
+                "LambdaThread");
+
+        rit.start();
+        thread.start();
+
+        System.out.println("Main is exiting");
     }
 }
