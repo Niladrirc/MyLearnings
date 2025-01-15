@@ -9,8 +9,8 @@ public class BruteForce {
         System.out.print("Enter fibonacci limit: ");
         int n = sc.nextInt();
 
-        int[] fibArray = new int[n+1];
-        fib(fibArray, n);
+        int[] fibArray = new int[n];
+        fib(fibArray, n-1);
 
         for (int element : fibArray) {
             System.out.print(element + ", ");
