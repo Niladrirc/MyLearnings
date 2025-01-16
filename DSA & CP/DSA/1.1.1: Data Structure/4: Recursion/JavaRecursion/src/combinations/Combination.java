@@ -16,6 +16,10 @@ public class Combination {
         Naive naiveApproach = new Naive();
         long result = naiveApproach.result(n,r);
 
-        System.out.println("Result: " + result);
+        PascalsTriangle pascalsTriangle = new PascalsTriangle();
+        long pascalResult = pascalsTriangle.result(n, r);
+
+        System.out.println("Naive Result: " + result);
+        System.out.println("Pascal Triangle Result: " + pascalResult);
     }
 }
