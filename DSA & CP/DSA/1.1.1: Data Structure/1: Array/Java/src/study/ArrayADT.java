@@ -52,21 +52,10 @@ class Array {
     }
 
     public void update(int index, int value) {
-        if (index >= this.size) {
-            throw new ArrayIndexOutOfBoundsException("Provided index out of bounds");
-        }
-
-        if (index < this.length) {
-            for (int i=length; i>index; i--) {
-                array[i] = array[i-1];
-            }
-        } else {
-            for (int i = length; i < index; i++) {
-                this.array[i] = 0;
-            }
+        if (index >= this.length) {
+            throw new ArrayIndexOutOfBoundsException("Index greater than array length");
         }
         this.array[index] = value;
-        this.length++;
     }
 
     public int removeElement(int index) {
