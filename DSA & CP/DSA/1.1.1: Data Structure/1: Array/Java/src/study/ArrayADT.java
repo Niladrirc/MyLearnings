@@ -281,6 +281,22 @@ class Array {
         }
     }
 
+    public void findDuplicateAndCount() {
+        int maxIndex = max();
+        int[] H = new int[maxIndex];
+
+        for (int element : this.array) {
+            H[element] = H[element] + 1;
+        }
+
+        for (int i=0; i<H.length; i++) {
+            if (H[i] > 0) {
+                System.out.println("Element - " + i + " occurs " + H[i] + " times");
+            }
+        }
+
+    }
+
     private Array unsortedUnion(Array otherArray) {
         Array newArray = new Array(otherArray.getLength() + this.length);
         System.arraycopy(this.array, 0, newArray.getArray(), 0, this.length);
