@@ -73,11 +73,12 @@ class Array {
         if (index >= this.length) {
             throw new ArrayIndexOutOfBoundsException("Provided index out of bounds");
         }
+        int element = array[index];
         for (int i = index; i < this.length; i++) {
             array[i] = array[i+1];
         }
         this.length--;
-        return array[index];
+        return element;
     }
 
     public int binarySearchLoop(int value) {
