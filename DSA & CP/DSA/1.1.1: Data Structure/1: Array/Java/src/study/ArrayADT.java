@@ -171,7 +171,7 @@ class Array {
         if (length == size) {
             throw new ArrayIndexOutOfBoundsException("Array is full. Cannot shift array to right");
         }
-        for (int i = length; i > 0; i++) {
+        for (int i = length; i > 0; i--) {
             array[i] = array[i-1];
         }
         length++;
