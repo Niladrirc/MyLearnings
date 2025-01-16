@@ -14,6 +14,10 @@ class Array {
         this.array = new int[size];
     }
 
+    public boolean isEmpty() {
+        return this.length == 0;
+    }
+
     public int getLength() {
         return this.length;
     }
@@ -149,10 +153,13 @@ class Array {
     }
 
     public int[] leftShift() {
-        for (int i = 0; i < length; i++) {
+        if (this.isEmpty()) {
+            throw new UnsupportedOperationException("Array is empty");
+        }
+        for (int i = 0; i < length-1; i++) {
             array[i] = array[i+1];
         }
-        length--;
+        this.length--;
         return array;
     }
 
@@ -170,6 +177,9 @@ class Array {
     }
 
     public int[] leftRotate() {
+        if (isEmpty())
+            throw new UnsupportedOperationException("Array is empty!");
+
         int leftMostElement = this.array[0];
         for (int i = 1; i < length; i++) {
             array[i-1] = array[i];
@@ -196,16 +206,17 @@ class Array {
         return true;
     }
 
-    public void sortInsert(int value) throws Exception {
+    public void sortInsert(int value) {
         if (!this.isSorted()) {
-            throw new Exception("Array is not sorted. This method is not allowed");
+            throw new UnsupportedOperationException("Array is not sorted. This method is not allowed");
         }
         if (length == size) {
             throw new ArrayIndexOutOfBoundsException("Array is full. Cannot insert new element");
         }
-        int index = length-1;
+        this.array[length++] = 0;
+        int index = length;
         while (value > array[index]) {
-            array[index+1] = array[index];
+            array[index] = array[index-1];
             index--;
         }
         array[index] = value;
