@@ -216,6 +216,7 @@ class Array {
         }
         int index = length-1;
         while (value > array[index]) {
+            array[index+1] = array[index];
             index--;
         }
         array[index] = value;
@@ -232,35 +233,33 @@ class Array {
     private int[] mergeWithSorting(Array newArray) throws Exception {
         int[] mergedArray = new int[newArray.length + this.length];
         int thisArrayIndex = 0, newArrayIndex = 0, mergedArrayIndex = 0;
-        while (thisArrayIndex<newArray.length && newArrayIndex<mergedArray.length) {
-            if (array[thisArrayIndex] > array[newArrayIndex]) {
-                mergedArray[mergedArrayIndex] = array[newArrayIndex];
+        while (thisArrayIndex < this.length && newArrayIndex < newArray.length) {
+            if (this.array[thisArrayIndex] > newArray.array[newArrayIndex]) {
+                mergedArray[mergedArrayIndex] = newArray.array[newArrayIndex];
                 mergedArrayIndex++;
                 newArrayIndex++;
-            } else if (array[thisArrayIndex] < array[newArrayIndex]) {
-                mergedArray[mergedArrayIndex] = array[thisArrayIndex];
+            } else if (this.array[thisArrayIndex] < newArray.array[newArrayIndex]) {
+                mergedArray[mergedArrayIndex] = this.array[thisArrayIndex];
                 mergedArrayIndex++;
                 thisArrayIndex++;
             } else {
                 mergedArray[mergedArrayIndex] = array[thisArrayIndex];
                 mergedArrayIndex++;
                 thisArrayIndex++;
-                mergedArray[mergedArrayIndex] = array[newArrayIndex];
+                mergedArray[mergedArrayIndex] = newArray.array[newArrayIndex];
                 mergedArrayIndex++;
                 newArrayIndex++;
             }
         }
-        if (thisArrayIndex < length) {
-            for (int i = thisArrayIndex; i < length; i++) {
-                mergedArray[mergedArrayIndex] = array[i];
-                mergedArrayIndex++;
-            }
+
+        for (int i = thisArrayIndex; i < this.length; i++) {
+            mergedArray[mergedArrayIndex] = this.array[i];
+            mergedArrayIndex++;
         }
-        if (newArrayIndex < length) {
-            for (int i = newArrayIndex; i < length; i++) {
-                mergedArray[mergedArrayIndex] = array[i];
-                mergedArrayIndex++;
-            }
+
+        for (int i = newArrayIndex; i < newArray.length; i++) {
+            mergedArray[mergedArrayIndex] = newArray.array[i];
+            mergedArrayIndex++;
         }
 
         return mergedArray;
@@ -269,8 +268,8 @@ class Array {
 
     private int[] append(Array newArray) {
         int[] mergedArray = new int[newArray.length + this.length];
-        System.arraycopy(array, 0, mergedArray, 0, newArray.length);
-        System.arraycopy(newArray.getArray(), 0, mergedArray, newArray.length, newArray.length);
+        System.arraycopy(this.array, 0, mergedArray, 0, this.length);
+        System.arraycopy(newArray.getArray(), 0, mergedArray, this.length, newArray.length);
         return mergedArray;
     }
 
@@ -298,34 +297,32 @@ class Array {
     private Array sortedUnion(Array otherArray) {
         Array newArray = new Array(otherArray.getLength() + this.length);
         int thisArrayIndex = 0, otherArrayIndex = 0, newArrayIndex = 0;
-        while (thisArrayIndex<this.array.length && otherArrayIndex<otherArray.getLength()) {
+        while (thisArrayIndex < this.array.length && otherArrayIndex < otherArray.getLength()) {
             if (this.array[thisArrayIndex] < otherArray.getArray()[otherArrayIndex]) {
-                newArray.addElement(this.array[thisArrayIndex]);
-                thisArrayIndex++; newArrayIndex++;
+                newArray.addElement(this.array[thisArrayIndex++]);
+                newArrayIndex++;
             } else if (this.array[thisArrayIndex] > otherArray.getArray()[otherArrayIndex]) {
-                newArray.addElement(otherArray.getArray()[otherArrayIndex]);
-                otherArrayIndex++; newArrayIndex++;
+                newArray.addElement(otherArray.getArray()[otherArrayIndex++]);
+                newArrayIndex++;
             } else {
                 newArray.addElement(this.array[thisArrayIndex]);
                 thisArrayIndex++; newArrayIndex++; newArrayIndex++;
             }
         }
 
-        if (thisArrayIndex < this.length) {
-            for (int i = thisArrayIndex+1; i < this.length; i++) {
-                newArray.addElement(this.array[i]);
-            }
-        } else if (otherArrayIndex < otherArray.getLength()) {
-            for (int i = otherArrayIndex+1; i < this.length; i++) {
-                newArray.addElement(otherArray.getArray()[i]);
-            }
+        for (int i = thisArrayIndex+1; i < this.length; i++) {
+            newArray.addElement(this.array[i]);
+        }
+
+        for (int i = otherArrayIndex+1; i < this.length; i++) {
+            newArray.addElement(otherArray.getArray()[i]);
         }
 
         return newArray;
     }
 
     public Array intersection(Array otherArray) throws Exception {
-        Array intersectionArray = new Array(Math.max(this.length, otherArray.getLength()));
+        Array intersectionArray = new Array(Math.min(this.length, otherArray.getLength()));
         for (int thisArrayIndex = 0; thisArrayIndex < this.array.length; thisArrayIndex++) {
             for (int otherArrayIndex = 0; otherArrayIndex < otherArray.getLength(); otherArrayIndex++) {
                 if (this.array[thisArrayIndex] == otherArray.get(otherArrayIndex)) {
@@ -348,16 +345,15 @@ class Array {
         }
         return differenceArray;
     }
-
     public void findMissingElements() {
         int maxIndex = this.max();
         Array missingElements = new Array(maxIndex);
-        for (int i : array) {
+        for (int i : this.array) {
             missingElements.update(i, missingElements.get(i)+1);
         }
         System.out.print("Missing elements are: ");
         for (int i : missingElements.getArray()) {
-            if (i > 0)
+            if (i == 0)
                 System.out.print(i + ", ");
         }
     }
