@@ -151,7 +151,9 @@ class Array {
     public int[] reverseInPlace() {
         int low = 0, high = this.length - 1;
         while (low < high) {
+            int temp = array[low];
             array[low] = array[high];
+            array[high] = temp;
             low++; high--;
         }
         return array;
