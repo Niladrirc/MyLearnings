@@ -4,7 +4,7 @@ public class LastWordLength {
     public static void main(String[] args) {
         String s = "a";
 
-        System.out.println("Last Word length: "+ lengthOfLastWord(s));
+        System.out.println("Last Word length: "+ lengthOfLastWordNew(s));
     }
 
     private static int lengthOfLastWord(String s) {
@@ -22,5 +22,11 @@ public class LastWordLength {
             i--;
         }
         return count;
+    }
+
+    private static int lengthOfLastWordNew(String s) {
+        String[] strings = s.split(" ");
+
+        return strings[strings.length - 1].length();
     }
 }
