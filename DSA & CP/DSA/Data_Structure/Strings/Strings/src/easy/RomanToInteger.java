@@ -13,7 +13,7 @@ public class RomanToInteger {
         for (int i=0; i<s.length(); i++) {
             char thisChar = s.charAt(i);
             char nextChar = ' ';
-            if (i!=s.length()-1) {
+            if (i != s.length()-1) {
                 nextChar = s.charAt(i+1);
             }
 
