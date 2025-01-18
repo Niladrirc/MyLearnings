@@ -12,6 +12,7 @@ public class HotelService {
         hotels.add(new Hotel(10000, 4, HotelType.FOUR_STAR));
         hotels.add(new Hotel(20000, 5, HotelType.FIVE_STAR));
         hotels.add(new Hotel(5000, 3, HotelType.FOUR_STAR));
+        hotels.add(new Hotel(16000, 5, HotelType.FIVE_STAR));
     }
 
     public List<Hotel> filterHotels(IFilterHotel filter) {
