@@ -1,4 +1,7 @@
-package passingFunctionsAsParametersWithoutLambdas;
+package passingFunctionsAsParametersWithoutLambdas.withConcreteImpl;
+
+import passingFunctionsAsParametersWithoutLambdas.Hotel;
+import passingFunctionsAsParametersWithoutLambdas.HotelService;
 
 import java.util.List;
 
