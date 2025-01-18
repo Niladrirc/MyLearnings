@@ -3,6 +3,9 @@ package practice;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
+/**
+ * Write a Java program to implement a lambda expression to check if a given string is empty.
+ */
 public class StringEmptyCheck {
     public static void main(String[] args) {
         Predicate<String> expression = str -> str.isEmpty();
