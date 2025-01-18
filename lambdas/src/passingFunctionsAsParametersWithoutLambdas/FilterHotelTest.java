@@ -24,7 +24,14 @@ public class FilterHotelTest {
          * basically if you want to pass functions as method arguments then,
          * wrap it inside the interface
          * because, functions cannot be directly passed as arguments but objects can
-         * we just wrap the function with the interface so that it can be passed as method argument
+         * we just wrap the function with the interface so that it can be passed as method argument.
+         *
+         *
+         * Issue with this approach:
+         *      Everytime the user want to pass a custom filter logic
+         *      they have to implement the filtering interface
+         * Solution:
+         *      Using anonymous inner class.
          */
     }
 }
