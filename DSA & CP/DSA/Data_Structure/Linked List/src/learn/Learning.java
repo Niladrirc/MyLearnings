@@ -15,6 +15,8 @@ public class Learning {
             System.out.println(integer);
         }
 
+        list.display();
+
 //        dll.add(0);
 //        dll.add(1);
 //        dll.add(2);
