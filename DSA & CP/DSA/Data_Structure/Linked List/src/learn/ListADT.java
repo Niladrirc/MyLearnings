@@ -1,6 +1,8 @@
 package src.learn;
 
-class ListADT<T> {
+import java.util.Iterator;
+
+class ListADT<T> implements Iterable<T> {
     private Node<T> head;
     private Node<T> tail;
     private int size;
@@ -33,8 +35,45 @@ class ListADT<T> {
         return size == 0;
     }
 
-    public boolean contains(Object o) {
-        return indexOf(o) > 0;
+    @Override
+    public Iterator<T> iterator() {
+        return new ListADTIterator<>(this);
+    }
+
+
+    private static class ListADTIterator<E> implements Iterator<E> {
+
+        private final ListADT<E> list;
+        private int index;
+
+        public ListADTIterator(ListADT<E> list) {
+            this.list = list;
+            this.index = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return index < list.size;
+        }
+
+        @Override
+        public E next() {
+            return list.get(index++).data;
+        }
+    }
+
+    public Node<T> get(int index) {
+        if (this.size() == 0) {
+            System.err.println("List is empty!");
+            return null;
+        }
+        Node<T> temp = head;
+        int i=0;
+        while (i<index) {
+            temp = temp.next;
+            i++;
+        }
+        return temp;
     }
 
     public void display() {
@@ -52,40 +91,6 @@ class ListADT<T> {
             }
         }
         System.out.print(" ]\n");
-    }
-
-    public void display(Node<T> node) {
-        if (node == null) {
-            System.err.println("List is empty!");
-            return;
-        }
-        Node<T> temp = node;
-        System.out.print("List: [ ");
-        while (temp != null) {
-            System.out.print(temp.data);
-            temp = temp.next;
-            if (temp != null) {
-                System.out.print(", ");
-            }
-        }
-        System.out.print(" ]");
-        System.out.println();
-    }
-
-    public Node<T> createList(T[] arr) {
-        for (T t : arr) {
-            Node<T> newNode = new Node<>(t);
-            if (head == null) {
-                head = newNode;
-                tail = newNode;
-                this.size = 1;
-            } else {
-                tail.next = newNode;
-                tail = newNode;
-                this.size++;
-            }
-        }
-        return head;
     }
 
     public void add(T data) {
@@ -125,12 +130,12 @@ class ListADT<T> {
         return -1;
     }
 
-    public boolean contains(Node<T> node, T target) {
-        if (node == null) {
+    public boolean contains(T target) {
+        if (this.size() == 0) {
             System.err.println("List is empty!");
             return false;
         }
-        Node<T> temp = node;
+        Node<T> temp = head;
         while (temp != null) {
             if (temp.data.equals(target)) {
                 return true;
@@ -140,25 +145,8 @@ class ListADT<T> {
         return false;
     }
 
-    public Object sum(Node<T> node) {
-        if (node == null) {
-            System.err.println("List is empty!");
-        }
-        if (node != null && !(node.data instanceof Number)) {
-            System.err.println("Summation not possible for non-numeric types.");
-            return null;
-        }
-        Node<T> temp = node;
-        double sum = 0.0;
-        while (temp != null) {
-            sum += ((Number) temp.data).doubleValue();
-            temp = temp.next;
-        }
-        return sum;
-    }
-
     public Object sum() {
-        if (size == 0) {
+        if (this.size() == 0) {
             System.err.println("List is empty!");
             return null;
         }
@@ -198,22 +186,6 @@ class ListADT<T> {
         return largest;
     }
 
-    public int findIndex(Node<T> node, T target) {
-        if (node == null) {
-            System.err.println("List is empty!");
-            return -1;
-        }
-        Node<T> temp = node; int index = 0;
-        while (temp != null) {
-            if (temp.data.equals(target)) {
-                return index;
-            }
-            index++;
-            temp = temp.next;
-        }
-        return -1;
-    }
-
     public int findIndex(T target) {
         if (size == 0) {
             System.err.println("List is empty!");
@@ -228,21 +200,6 @@ class ListADT<T> {
             temp = temp.next;
         }
         return -1;
-    }
-
-    public Node<T> find(Node<T> node, T target) {
-        if (size == 0) {
-            System.err.println("List is empty!");
-            return null;
-        }
-        Node<T> temp = node;
-        while (temp != null) {
-            if (temp.data.equals(target)) {
-                return temp;
-            }
-            temp = temp.next;
-        }
-        return null;
     }
 
     public void insert(T data, int index) {
@@ -439,5 +396,21 @@ class ListADT<T> {
             head = B;
             B.next = A;
         }
+    }
+
+    public Node<T> createList(T[] arr) {
+        for (T t : arr) {
+            Node<T> newNode = new Node<>(t);
+            if (head == null) {
+                head = newNode;
+                tail = newNode;
+                this.size = 1;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
+                this.size++;
+            }
+        }
+        return head;
     }
 }
