@@ -81,16 +81,13 @@ class ListADT<T> implements Iterable<T> {
             System.err.println("List is empty!");
             return;
         }
-        Node<T> temp = this.head;
-        System.out.print("List: [ ");
-        while (temp != null) {
-            System.out.print(temp.data);
-            temp = temp.next;
-            if (temp != null) {
-                System.out.print(", ");
-            }
+        Iterator<T> iterator = this.iterator();
+        System.out.print("[ " + iterator.next());
+        while (iterator.hasNext()) {
+            System.out.print(", ");
+            System.out.print(iterator.next());
         }
-        System.out.print(" ]\n");
+        System.out.println(" ]");
     }
 
     public void add(T data) {
