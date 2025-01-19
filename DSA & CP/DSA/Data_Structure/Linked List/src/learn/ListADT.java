@@ -5,6 +5,12 @@ class ListADT<T> {
     private Node<T> tail;
     private int size;
 
+    public ListADT() {
+        Node<T> newNode = new Node<>();
+        head = tail = null;
+        size = 0;
+    }
+
     public ListADT(T value) {
         Node<T> newNode = new Node<>(value);
         head = newNode;
