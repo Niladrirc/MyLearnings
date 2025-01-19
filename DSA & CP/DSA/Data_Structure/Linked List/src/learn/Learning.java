@@ -10,10 +10,8 @@ public class Learning {
         list.add(1);
         list.add(2);
         list.add(5);
-
-        for (Integer integer : list) {
-            System.out.println(integer);
-        }
+        list.add(10);
+        list.remove((Integer) 2);
 
         list.display();
 
