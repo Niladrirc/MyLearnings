@@ -3,6 +3,7 @@ package src.java.learning;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class StreamFindExamples {
@@ -17,9 +18,14 @@ public class StreamFindExamples {
 
         // Find any 1 prime number
         Optional<Integer> anyPrime = list.stream()
-                .filter(StreamFindExamples::isPrime)
+                .filter(num -> {
+                    for (int i = 2; i < num; i++) {
+                        if (num%i == 0) return false;
+                    }
+                    return true;
+                })
                 .findAny();
-        anyPrime.ifPresent(value -> System.out.println("Prime number: "+value));
+        anyPrime.ifPresent(System.out::println);
 
         // Find the 1st prime digit
         Optional<Integer> firstPrime = list.stream()
