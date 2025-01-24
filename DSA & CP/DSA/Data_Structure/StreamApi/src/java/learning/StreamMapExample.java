@@ -17,7 +17,7 @@ public class StreamMapExample {
 
         //Get length of each fruit
         List<Integer> fruitLengths = fruits.stream()
-                .map(String ::length)
+                .map(String::length)
                 .toList();
 
         System.out.println(fruitLengths);
