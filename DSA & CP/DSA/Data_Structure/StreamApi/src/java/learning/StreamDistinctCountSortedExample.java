@@ -27,7 +27,7 @@ public class StreamDistinctCountSortedExample {
 
         long totalCount = elements.stream()
                 .count();
-        System.out.println("Total nu,ber of elements: " +totalCount);
+        System.out.println("Total number of elements: " +totalCount);
 
         List<Integer> sortedElements = elements.stream()
                 .sorted()
