@@ -8,7 +8,7 @@ public class CustomStack {
         array = new int[size];
         stackTop = -1;
         lock1 = new Object();
-        lock2 = new String();
+        lock2 = "";
     }
 
     public boolean isEmpty() {
