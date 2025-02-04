@@ -63,12 +63,12 @@ public class AVLTree {
         node.height = treeHeight(node);
 
         // Check bf and perform rotation if necessary
-        /**
-         * there will be 4 categories of rotation
-         * 1. LL rotation -> currentNode's balance_factor = 2 & currentNode.left's balance_factor = 1
-         * 2. RR rotation -> currentNode's balance_factor = -2 & currentNode.right's balance_factor = -1
-         * 3. LR rotation -> currentNode's balance_factor = 2 & currentNode.right's balance_factor = -1
-         * 4. RL rotation -> currentNode's balance_factor = -2 & currentNode.right's balance_factor = 1
+        /*
+          there will be 4 categories of rotation
+          1. LL rotation -> currentNode's balance_factor = 2 & currentNode.left's balance_factor = 1
+          2. RR rotation -> currentNode's balance_factor = -2 & currentNode.right's balance_factor = -1
+          3. LR rotation -> currentNode's balance_factor = 2 & currentNode.right's balance_factor = -1
+          4. RL rotation -> currentNode's balance_factor = -2 & currentNode.right's balance_factor = 1
          */
         if (getBalanceFactor(node) == 2 && getBalanceFactor(node.left) == 1) {
             return getLLRotatedSubtree(node);
