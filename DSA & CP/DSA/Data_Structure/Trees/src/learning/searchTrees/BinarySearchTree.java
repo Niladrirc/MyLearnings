@@ -73,7 +73,7 @@ public class BinarySearchTree {
     private void insertIterative(TreeNode node, int key) {
         TreeNode newNode = new TreeNode(key);
         if (node == null) {
-            node = newNode;
+            root = newNode;
             return;
         }
         TreeNode current = node;
@@ -132,6 +132,7 @@ public class BinarySearchTree {
                         node = null;
                     }
                 } else {
+//                    TreeNode inOrderSuccessorNode = getInOrderSuccessor(current.right);
                     if (getTreeHeight(current.left) > getTreeHeight(current.right)) {
                         // get the leftmost leaf child of right subtree
                         current.data = getInOrderSuccessor(current.right);
