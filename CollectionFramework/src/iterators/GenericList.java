@@ -35,6 +35,8 @@ public class GenericList<T> implements Iterable<T> {
     }
 
 
+
+
     private static class MyGenericIterator<E> implements Iterator<E> {
 
         private GenericList<E> list;
