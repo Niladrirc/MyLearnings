@@ -1,6 +1,7 @@
 package src.learning.heap;
 
 import java.util.Arrays;
+import java.util.Collection;
 
 public class HeapADT {
     private int[] heapArray;
