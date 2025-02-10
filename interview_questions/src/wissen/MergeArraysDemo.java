@@ -41,4 +41,14 @@ public class MergeArraysDemo {
 
         return result;
     }
+
+    public static int[] mergeArraysWithoutDuplicates(int[] arr1, int[] arr2) {
+        HashSet<Integer> set1 = new HashSet<>(Arrays.stream(arr1).boxed().toList());
+        HashSet<Integer> set2 = new HashSet<>(Arrays.stream(arr2).boxed().toList());
+
+        set1.addAll(set2);
+
+        return set1.stream().sorted().mapToInt(Number::intValue).toArray();
+    }
+
 }
