@@ -14,7 +14,7 @@ public class CountPrimeSequence {
         for (int i=3; i<=MAX_RANGE; i++) {
             checkPrime(i);
         }
-        System.out.println("Number of primes till " + MAX_RANGE + " is: " + numOfPrimes + ". Time to calculate" +
+        System.out.println("Number of primes till " + MAX_RANGE + " is: " + numOfPrimes + 1 + ". Time to calculate" +
                 ": " + calculateTimeElapsed(System.nanoTime(), startNano));
     }
 
