@@ -289,4 +289,32 @@ public class MyDoublyLinkedList<T> implements Iterable<T> {
 
         return -1;
     }
+
+    /* traversal methods */
+
+    public void printForward() {
+        System.out.print("[");
+
+        System.out.print(head.getData());
+        DoubleNode<T> node = head.getNext();
+        while (node != null) {
+            System.out.print(", " + node.getData());
+            node = node.getNext();
+        }
+
+        System.out.println("]");
+    }
+
+
+    public void printBackward() {
+        System.out.print("[");
+        System.out.print(tail.getData());
+
+        DoubleNode<T> node = tail.getPrev();
+        while (node != null) {
+            System.out.print(", " + node.getData());
+        }
+
+        System.out.println("]");
+    }
 }
