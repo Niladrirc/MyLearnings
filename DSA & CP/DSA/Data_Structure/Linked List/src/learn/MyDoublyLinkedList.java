@@ -248,5 +248,45 @@ public class MyDoublyLinkedList<T> implements Iterable<T> {
         return node.getData();
     }
 
-    
+    /* utility methods */
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public void clear() {
+        head = tail = null;
+    }
+
+    public boolean contains(T data) {
+        if (isEmpty()) {
+            return false;
+        }
+
+        DoubleNode<T> node = head;
+        while (node != null) {
+            if (Objects.equals(data, node.getData())) {
+                return true;
+            }
+            node = node.getNext();
+        }
+
+        return false;
+    }
+
+    public int indexOf(T data) {
+        DoubleNode<T> node = head;
+        int index = 0;
+
+        while (node != null) {
+
+            if (Objects.equals(data, node.getData())) {
+                return index;
+            }
+
+            node = node.getNext();
+            index++;
+        }
+
+        return -1;
+    }
 }
