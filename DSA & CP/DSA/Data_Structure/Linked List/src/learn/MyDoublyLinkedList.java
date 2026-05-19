@@ -320,7 +320,21 @@ public class MyDoublyLinkedList<T> implements Iterable<T> {
 
     /* advanced methods */
     public void reverse() {
-        
+        if (isEmpty()) {
+            return;
+        }
+
+        DoubleNode<T> current = head;
+        while (current != null) {
+            DoubleNode<T> temp = current.getNext();
+            current.setNext(current.getPrev());
+            current.setPrev(temp);
+            current = temp;
+        }
+
+        DoubleNode<T> temp = head;
+        head = tail;
+        tail = temp;
     }
 
     @Override
