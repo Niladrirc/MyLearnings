@@ -1,12 +1,38 @@
 package src.learn;
 
-public class DoubleNode<E> {
-    E data;
-    DoubleNode<E> next;
-    DoubleNode<E> prev;
+public class DoubleNode<T> {
+    private DoubleNode<T> prev;
+    private T data;
+    private DoubleNode<T> next;
 
-    public DoubleNode(E data) { this.data = data; this.next = null; this.prev = null; }
-    public DoubleNode() { this.data = null; this.next = null; this.prev = null; }
-    public DoubleNode(E data, DoubleNode<E> next, DoubleNode<E> prev) { this.data = data; this.next = next; this.prev = prev; }
+    public DoubleNode(T data) {
+        this.data = data;
+    }
+
+    public DoubleNode(DoubleNode<T> prev, T data, DoubleNode<T> next) {
+        this.prev = prev;
+        this.data = data;
+        this.next = next;
+    }
+
+    public void setPrev(DoubleNode<T> prev) {
+        this.prev = prev;
+    }
+
+    public void setNext(DoubleNode<T> next) {
+        this.next = next;
+    }
+
+    public DoubleNode<T> getPrev() {
+        return prev;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public DoubleNode<T> getNext() {
+        return next;
+    }
 
 }
