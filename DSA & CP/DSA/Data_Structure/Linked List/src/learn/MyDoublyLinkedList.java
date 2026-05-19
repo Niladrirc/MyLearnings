@@ -317,4 +317,67 @@ public class MyDoublyLinkedList<T> implements Iterable<T> {
 
         System.out.println("]");
     }
+
+    /* advanced methods */
+    public void reverse() {
+        
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ForwardDoublyLinkedListIterator<>(this);
+    }
+
+    public Iterator<T> descendingIterator() {
+        return new ReverseDoublyLinkedListIterator<>(this);
+    }
+
+    private static class ReverseDoublyLinkedListIterator<V> implements Iterator<V> {
+
+        DoubleNode<V> currNode;
+
+        public ReverseDoublyLinkedListIterator(MyDoublyLinkedList<V> list) {
+            currNode = list.tail;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return currNode != null;
+        }
+
+        @Override
+        public V next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            V data = currNode.getData();
+            currNode = currNode.getPrev();
+            return data;
+        }
+        
+    }
+
+    private static class ForwardDoublyLinkedListIterator<U> implements Iterator<U> {
+
+        DoubleNode<U> currNode;
+
+        public ForwardDoublyLinkedListIterator(MyDoublyLinkedList<U> list) {
+            currNode = list.head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return currNode != null;
+        }
+
+        @Override
+        public U next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            U data = currNode.getData();
+            currNode = currNode.getNext();
+            return data;
+        }
+    }
 }
